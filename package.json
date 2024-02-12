@@ -1,16 +1,17 @@
 {
   "name": "@nyig/models",
-  "version": "0.2.2",
+  "version": "0.2.5",
   "license": "MIT",
-  "main": "dist/index.js",
-  "module": "dist/index.mjs",
-  "types": "dist/index.d.ts",
+  "main": "index.js",
+  "module": "index.mjs",
+  "types": "index.d.ts",
   "scripts": {
     "build": "tsup src/index.ts --format cjs,esm --dts",
     "clean": "rm -rf dist node_modules",
     "format": "prettier --write src",
     "lint": "pnpm run format && tsc",
-    "prepare": "husky install",
+    "prepare": "husky",
+    "prepublishOnly": "cp package.json README.md dist",
     "release": "pnpm run build && changeset publish"
   },
   "peerDependencies": {
