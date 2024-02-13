@@ -15,5 +15,5 @@ export const zPrivateBooking = z
 
 export const zMPrivateBooking = extendZodObjectForMongoose(zPrivateBooking);
 
-export type BPrivate = z.infer<typeof zPrivateBooking>;
-export type MBPrivate = z.infer<typeof zMPrivateBooking>;
+export type PrivateBooking = z.infer<typeof zPrivateBooking>;
+export type MPrivateBooking = z.infer<typeof zMPrivateBooking>;

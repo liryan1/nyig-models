@@ -28,8 +28,8 @@ export const zInvoice = z.object({
   billTo: z.string(),
   packages: z.array(zInvoicePackage),
   discounts: z.array(zDiscount),
-  textbook: z.number().optional(),
-  shipping: z.number().optional(),
+  textbook: z.number().int().min(1).optional(),
+  shipping: z.number().int().min(1).optional(),
   paid: z.nativeEnum(PaymentMethod).optional(),
   notes: z.string().optional(),
   /**

@@ -1,12 +1,6 @@
 import { z } from "zod";
 import { extendZodObjectForMongoose } from "../../mongoose";
-
-enum TicketStatus {
-  REQUESTED = "Requested",
-  IN_PROGRESS = "In-progress",
-  SIGN_OFF = "Sign-off",
-  COMPLETED = "Completed",
-}
+import { TicketStatus } from "./ticketStatus";
 
 export const zReportTicket = z.object({
   requester: z.string(),

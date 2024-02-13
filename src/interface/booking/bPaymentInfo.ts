@@ -4,7 +4,7 @@ export const zBPaymentInfo = z.object({
   /**
    * @units CENTS - Proposed payment amount in cents of the booking
    */
-  paymentAmount: z.number(),
+  paymentAmount: z.number().int().min(1),
   /**
    * True if the payment has been received. Populated by webhook.
    */

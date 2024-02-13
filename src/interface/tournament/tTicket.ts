@@ -18,7 +18,7 @@ export const zTTicket = z.object({
   /**
    *  @optional If date is provided and in the past, ticket cannot be purchased
    */
-  lastBuytableDate: z.coerce.date().optional(),
+  lastBuyableDate: z.coerce.date().optional(),
 });
 
 export const zMTTicket = extendZodObjectForMongoose(zTTicket);
