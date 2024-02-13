@@ -1,7 +1,8 @@
 import { z } from "zod";
 import { zUserRoles } from "./userRoles";
 import { GoRank } from "./goRank";
-import { extendZodObjectForMongoose } from "../../mongoose";
+import { extendZodObjectForMongoose } from "../mongoose";
+import { Types } from "mongoose";
 
 export const zUser = z.object({
   name: z.string().min(2).max(100),
@@ -18,8 +19,7 @@ export const zMUser = extendZodObjectForMongoose(zUser);
 
 export const zStudent = zUser.extend({
   rank: z.nativeEnum(GoRank),
-  // Object ID in mongoose linked to a user
-  guardian: z.string().optional(),
+  guardian: z.instanceof(Types.ObjectId).optional(),
 });
 export const zMStudent = extendZodObjectForMongoose(zStudent);
 

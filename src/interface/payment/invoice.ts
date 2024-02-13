@@ -1,6 +1,7 @@
+import { Types } from "mongoose";
 import { z } from "zod";
+import { extendZodObjectForMongoose } from "../mongoose";
 import { PaymentMethod } from "./paymentMethod";
-import { extendZodObjectForMongoose } from "../../mongoose";
 
 export const zDiscount = z.object({
   desc: z.string(),
@@ -8,19 +9,13 @@ export const zDiscount = z.object({
 });
 
 export const zInvoiceItem = z.object({
-  /**
-   * Mongoose object ID
-   */
-  course: z.string(),
+  course: z.instanceof(Types.ObjectId),
   price: z.number(),
   units: z.number(),
 });
 
 export const zInvoicePackage = z.object({
-  /**
-   * Mongoose object ID
-   */
-  student: z.string(),
+  student: z.instanceof(Types.ObjectId),
   items: z.array(zInvoiceItem),
 });
 
@@ -32,14 +27,8 @@ export const zInvoice = z.object({
   shipping: z.number().int().min(1).optional(),
   paid: z.nativeEnum(PaymentMethod).optional(),
   notes: z.string().optional(),
-  /**
-   * Mongoose object ID
-   */
-  createdBy: z.string(),
-  /**
-   * Mongoose object ID
-   */
-  lastEditBy: z.string().optional(),
+  createdBy: z.instanceof(Types.ObjectId),
+  lastEditBy: z.instanceof(Types.ObjectId).optional(),
 });
 
 export const zMInvoice = extendZodObjectForMongoose(zInvoice);

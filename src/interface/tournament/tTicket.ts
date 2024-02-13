@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { extendZodObjectForMongoose } from "../../mongoose";
+import { extendZodObjectForMongoose } from "../mongoose";
 
 export const zTTicket = z.object({
   name: z.string(),

@@ -1,20 +1,12 @@
+import { Types } from "mongoose";
 import { z } from "zod";
-import { extendZodObjectForMongoose } from "../../mongoose";
+import { extendZodObjectForMongoose } from "../mongoose";
 import { zTuition } from "../payment";
 
 export const zClassTracker = z.object({
-  /**
-   * Mongoose object ID
-   */
-  course: z.string(),
-  /**
-   * Mongoose object ID
-   */
-  teacher: z.string(),
-  /**
-   * Mongoose object ID
-   */
-  semester: z.string(),
+  course: z.instanceof(Types.ObjectId),
+  teacher: z.instanceof(Types.ObjectId),
+  student: z.instanceof(Types.ObjectId),
   classTimes: z.array(z.coerce.date()),
   completedList: z.array(z.boolean()),
   /**
@@ -23,6 +15,7 @@ export const zClassTracker = z.object({
   completed: z.boolean().optional(),
   tuition: zTuition.optional(),
   paid: z.boolean().optional(),
+  paused: z.boolean().optional(),
   notes: z.string().optional(),
 });
 

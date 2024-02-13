@@ -1,7 +1,8 @@
+import { Types } from "mongoose";
 import { z } from "zod";
-import { zDetailsTable, zScheduleTable } from "./table";
+import { extendZodObjectForMongoose } from "../mongoose";
 import { zImageDef } from "../public";
-import { extendZodObjectForMongoose } from "../../mongoose";
+import { zDetailsTable, zScheduleTable } from "./table";
 
 export const zTConfig = z.object({
   /**
@@ -50,7 +51,7 @@ export const zTConfig = z.object({
   /**
    * List of ticket object IDs for this tournament
    */
-  tickets: z.array(z.string()),
+  tickets: z.array(z.instanceof(Types.ObjectId)),
   /**
    * If false, the tournament registration is closed
    */

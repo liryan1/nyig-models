@@ -1,10 +1,11 @@
+import { Types } from "mongoose";
 import { z } from "zod";
-import { extendZodObjectForMongoose } from "../../mongoose";
+import { extendZodObjectForMongoose } from "../mongoose";
 import { TicketStatus } from "./ticketStatus";
 
 export const zReportTicket = z.object({
-  requester: z.string(),
-  resolver: z.string(),
+  requester: z.instanceof(Types.ObjectId),
+  resolver: z.instanceof(Types.ObjectId),
   status: z.nativeEnum(TicketStatus),
   title: z.string(),
   description: z.string(),

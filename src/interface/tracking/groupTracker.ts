@@ -1,21 +1,13 @@
 import { z } from "zod";
-import { extendZodObjectForMongoose } from "../../mongoose";
+import { extendZodObjectForMongoose } from "../mongoose";
 import { zScheduleData } from "./scheduleData";
 import { AgeGroup } from "../course";
+import { Types } from "mongoose";
 
 export const zGroupTracker = z.object({
-  /**
-   * Mongoose object ID
-   */
-  course: z.string(),
-  /**
-   * Mongoose object ID
-   */
-  teacher: z.string(),
-  /**
-   * Mongoose object ID
-   */
-  semester: z.string(),
+  course: z.instanceof(Types.ObjectId),
+  teacher: z.instanceof(Types.ObjectId),
+  semester: z.instanceof(Types.ObjectId),
   scheduleData: zScheduleData,
   /**
    * occurrences are tracked by week for Groups
@@ -24,9 +16,9 @@ export const zGroupTracker = z.object({
   /**
    * attendances are tracked by week for Groups
    */
-  attendances: z.array(z.string()),
+  attendances: z.array(z.instanceof(Types.ObjectId)),
   /**
-   * ID of the course instance, e.g., 101
+   * public-facing ID of the course instance, e.g., 101
    */
   courseId: z.string().optional(),
   /**

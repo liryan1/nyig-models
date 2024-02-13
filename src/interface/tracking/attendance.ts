@@ -1,11 +1,12 @@
+import { Types } from "mongoose";
 import { z } from "zod";
+import { extendZodObjectForMongoose } from "../mongoose";
 import { zTuition } from "../payment/tuition";
-import { CampOption } from "./campOption";
-import { extendZodObjectForMongoose } from "../../mongoose";
 import { AttendState } from "./attendState";
+import { CampOption } from "./campOption";
 
 export const zAttendance = z.object({
-  student: z.string(),
+  student: z.instanceof(Types.ObjectId),
   states: z.array(z.nativeEnum(AttendState)),
   tuition: zTuition,
   paid: z.boolean().optional(),

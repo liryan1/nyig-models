@@ -1,12 +1,12 @@
+import { Types } from "mongoose";
 import { z } from "zod";
-import { extendZodObjectForMongoose } from "../../mongoose";
+import { extendZodObjectForMongoose } from "../mongoose";
 import { zBPaymentInfo } from "./bPaymentInfo";
 import { zBUserInfo } from "./bUserInfo";
 
 export const zGroupBooking = z
   .object({
-    userId: z.string().optional(),
-    gtId: z.string().optional(),
+    gtId: z.instanceof(Types.ObjectId).optional(),
     isTrial: z.boolean().optional(),
     isOnline: z.boolean(),
     classDate: z.string().optional(),

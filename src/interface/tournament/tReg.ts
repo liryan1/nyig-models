@@ -1,15 +1,13 @@
+import { Types } from "mongoose";
 import { z } from "zod";
-import { extendZodObjectForMongoose } from "../../mongoose";
-import { zTTicketReg } from "./tTicketReg";
 import { zBPaymentInfo, zBUserInfo } from "../booking";
+import { extendZodObjectForMongoose } from "../mongoose";
+import { zTTicketReg } from "./tTicketReg";
 
 export const zTReg = z
   .object({
     agaId: z.string(),
-    /**
-     * Mongoose ID of the tournament that the participant is registering for
-     */
-    tournamentId: z.string(),
+    tournamentId: z.instanceof(Types.ObjectId),
     tickets: z.array(zTTicketReg),
     /**
      * @units CENTS - Donation in cents
@@ -22,7 +20,7 @@ export const zTReg = z
     /**
      * Mongoose ID of the admin that edited the registration
      */
-    edited: z.string().optional(),
+    edited: z.instanceof(Types.ObjectId).optional(),
   })
   .merge(zBUserInfo)
   .merge(zBPaymentInfo);

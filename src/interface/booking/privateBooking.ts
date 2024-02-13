@@ -1,13 +1,13 @@
+import { Types } from "mongoose";
 import { z } from "zod";
-import { extendZodObjectForMongoose } from "../../mongoose";
+import { extendZodObjectForMongoose } from "../mongoose";
 import { zBPaymentInfo } from "./bPaymentInfo";
 import { zBUserInfo } from "./bUserInfo";
 
 export const zPrivateBooking = z
   .object({
-    userId: z.string().optional(),
-    courseId: z.string(),
-    teacherId: z.string(),
+    courseId: z.instanceof(Types.ObjectId),
+    teacherId: z.instanceof(Types.ObjectId),
     classDate: z.string().optional(),
   })
   .merge(zBUserInfo)

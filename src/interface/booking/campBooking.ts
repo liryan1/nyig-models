@@ -1,12 +1,12 @@
+import { Types } from "mongoose";
 import { z } from "zod";
-import { extendZodObjectForMongoose } from "../../mongoose";
+import { extendZodObjectForMongoose } from "../mongoose";
 import { CampOption } from "../tracking";
 import { zBPaymentInfo } from "./bPaymentInfo";
 import { zBUserInfo } from "./bUserInfo";
 
 export const zCampBooking = z
   .object({
-    userId: z.string().optional(),
     ctId: z.string().optional(),
     isOnline: z.boolean(),
     classDates: z.string(),

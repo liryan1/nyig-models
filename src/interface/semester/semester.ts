@@ -1,6 +1,6 @@
 import { z } from "zod";
 import { Season } from "./season";
-import { extendZodObjectForMongoose } from "../../mongoose";
+import { extendZodObjectForMongoose } from "../mongoose";
 
 export const zSemester = z.object({
   season: z.nativeEnum(Season),

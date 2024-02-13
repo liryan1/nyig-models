@@ -1,5 +1,6 @@
+import { Types } from "mongoose";
 import { z } from "zod";
-import { extendZodObjectForMongoose } from "../../mongoose";
+import { extendZodObjectForMongoose } from "../mongoose";
 
 export const zTeacherPaymentRow = z.object({
   course: z.string(),
@@ -9,7 +10,7 @@ export const zTeacherPaymentRow = z.object({
 });
 
 export const zTeacherPayment = z.object({
-  teacher: z.string(),
+  teacher: z.instanceof(Types.ObjectId),
   rows: z.array(zTeacherPaymentRow),
   paid: z.boolean().optional(),
 });

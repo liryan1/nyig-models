@@ -1,10 +1,8 @@
 import { z } from "zod";
+import { Types } from "mongoose";
 
 export const zTTicketReg = z.object({
-  /**
-   * Mongoose ID of the ticket
-   */
-  ticket: z.string(),
+  ticket: z.instanceof(Types.ObjectId),
   /**
    * integer minimum 1, otherwise no ticket is being bought
    */

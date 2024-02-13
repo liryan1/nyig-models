@@ -1,7 +1,7 @@
 import { z } from "zod";
 import { CourseCategory } from "./category";
 import { NYIGSchool } from "./school";
-import { extendZodObjectForMongoose } from "../../mongoose";
+import { extendZodObjectForMongoose } from "../mongoose";
 
 export const zCourse = z.object({
   name: z.string(),
