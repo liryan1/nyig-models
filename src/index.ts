@@ -1,1 +1,1 @@
-export * from "./z/student";
+export * from "./interface";
