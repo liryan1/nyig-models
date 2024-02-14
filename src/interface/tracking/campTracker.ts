@@ -3,9 +3,9 @@ import { z } from "zod";
 import { extendZodObjectForMongoose } from "../mongoose";
 
 export const zCampTracker = z.object({
-  course: z.instanceof(Types.ObjectId),
-  teacher: z.instanceof(Types.ObjectId),
-  semester: z.instanceof(Types.ObjectId),
+  course: z.instanceof(Types.ObjectId).or(z.string()),
+  teacher: z.instanceof(Types.ObjectId).or(z.string()),
+  semester: z.instanceof(Types.ObjectId).or(z.string()),
   /**
    * occurrences are tracked by week for camps
    */

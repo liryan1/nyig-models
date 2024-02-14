@@ -10,7 +10,7 @@ export const zTeacherPaymentRow = z.object({
 });
 
 export const zTeacherPayment = z.object({
-  teacher: z.instanceof(Types.ObjectId),
+  teacher: z.instanceof(Types.ObjectId).or(z.string()),
   rows: z.array(zTeacherPaymentRow),
   paid: z.boolean().optional(),
 });

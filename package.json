@@ -1,6 +1,6 @@
 {
   "name": "@nyig/models",
-  "version": "0.2.15",
+  "version": "0.2.21",
   "license": "MIT",
   "main": "index.js",
   "module": "index.mjs",

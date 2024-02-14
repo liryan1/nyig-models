@@ -6,7 +6,7 @@ import { zBUserInfo } from "./bUserInfo";
 
 export const zGroupBooking = z
   .object({
-    gtId: z.instanceof(Types.ObjectId).optional(),
+    gtId: z.instanceof(Types.ObjectId).or(z.string()).optional(),
     isTrial: z.boolean().optional(),
     isOnline: z.boolean(),
     classDate: z.string().optional(),

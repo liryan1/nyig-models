@@ -6,8 +6,8 @@ import { zBUserInfo } from "./bUserInfo";
 
 export const zPrivateBooking = z
   .object({
-    courseId: z.instanceof(Types.ObjectId),
-    teacherId: z.instanceof(Types.ObjectId),
+    courseId: z.instanceof(Types.ObjectId).or(z.string()),
+    teacherId: z.instanceof(Types.ObjectId).or(z.string()),
     classDate: z.string().optional(),
   })
   .merge(zBUserInfo)

@@ -5,9 +5,9 @@ import { AgeGroup } from "../course";
 import { Types } from "mongoose";
 
 export const zGroupTracker = z.object({
-  course: z.instanceof(Types.ObjectId),
-  teacher: z.instanceof(Types.ObjectId),
-  semester: z.instanceof(Types.ObjectId),
+  course: z.instanceof(Types.ObjectId).or(z.string()),
+  teacher: z.instanceof(Types.ObjectId).or(z.string()),
+  semester: z.instanceof(Types.ObjectId).or(z.string()),
   scheduleData: zScheduleData,
   /**
    * occurrences are tracked by week for Groups

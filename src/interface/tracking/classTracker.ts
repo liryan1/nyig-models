@@ -4,9 +4,9 @@ import { extendZodObjectForMongoose } from "../mongoose";
 import { zTuition } from "../payment";
 
 export const zClassTracker = z.object({
-  course: z.instanceof(Types.ObjectId),
-  teacher: z.instanceof(Types.ObjectId),
-  student: z.instanceof(Types.ObjectId),
+  course: z.instanceof(Types.ObjectId).or(z.string()),
+  teacher: z.instanceof(Types.ObjectId).or(z.string()),
+  student: z.instanceof(Types.ObjectId).or(z.string()),
   classTimes: z.array(z.coerce.date()),
   completedList: z.array(z.boolean()),
   /**

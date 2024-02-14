@@ -7,7 +7,7 @@ import { zTTicketReg } from "./tTicketReg";
 export const zTReg = z
   .object({
     agaId: z.string(),
-    tournamentId: z.instanceof(Types.ObjectId),
+    tournamentId: z.instanceof(Types.ObjectId).or(z.string()),
     tickets: z.array(zTTicketReg),
     /**
      * @units CENTS - Donation in cents

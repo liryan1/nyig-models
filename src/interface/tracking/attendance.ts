@@ -6,7 +6,7 @@ import { AttendState } from "./attendState";
 import { CampOption } from "./campOption";
 
 export const zAttendance = z.object({
-  student: z.instanceof(Types.ObjectId),
+  student: z.instanceof(Types.ObjectId).or(z.string()),
   states: z.array(z.nativeEnum(AttendState)),
   tuition: zTuition,
   paid: z.boolean().optional(),

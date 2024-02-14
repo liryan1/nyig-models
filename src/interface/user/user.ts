@@ -8,12 +8,27 @@ export const zUser = z.object({
   name: z.string().min(2).max(100),
   username: z.string().optional(),
   password: z.string().optional(),
-  roles: zUserRoles.optional(),
+  roles: z.array(z.number().int()).optional(),
   email: z.string().email().max(100).optional(),
   address: z.string().optional(),
-  country: z.string().optional(),
-  phoneNumber: z.string().optional(),
-  birthDate: z.string().optional(),
+  country: z
+    .string()
+    .length(2, {
+      message: "Enter the 2-letter country code",
+    })
+    .optional(),
+  phoneNumber: z
+    .string()
+    .regex(/^\d{10}/, {
+      message: `Please enter a valid 10-digit US phone number with numbers only`,
+    })
+    .optional(),
+  birthDate: z
+    .string()
+    .regex(/^\d{4}-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01])$/, {
+      message: "Enter a valid date in yyyy-mm-dd format",
+    })
+    .optional(),
 });
 export const zMUser = extendZodObjectForMongoose(zUser);
 

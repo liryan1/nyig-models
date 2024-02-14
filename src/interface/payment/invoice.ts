@@ -9,13 +9,13 @@ export const zDiscount = z.object({
 });
 
 export const zInvoiceItem = z.object({
-  course: z.instanceof(Types.ObjectId),
+  course: z.instanceof(Types.ObjectId).or(z.string()),
   price: z.number(),
   units: z.number(),
 });
 
 export const zInvoicePackage = z.object({
-  student: z.instanceof(Types.ObjectId),
+  student: z.instanceof(Types.ObjectId).or(z.string()),
   items: z.array(zInvoiceItem),
 });
 
@@ -27,7 +27,7 @@ export const zInvoice = z.object({
   shipping: z.number().int().min(1).optional(),
   paid: z.nativeEnum(PaymentMethod).optional(),
   notes: z.string().optional(),
-  createdBy: z.instanceof(Types.ObjectId),
+  createdBy: z.instanceof(Types.ObjectId).or(z.string()),
   lastEditBy: z.instanceof(Types.ObjectId).optional(),
 });
 
