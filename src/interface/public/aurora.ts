@@ -22,9 +22,6 @@ export const zCourseTable = z.object({
 export type CourseTable = z.infer<typeof zCourseTable>;
 
 export type TeacherDisplay = z.infer<typeof zTeacherDisplay>;
-export interface MNYIGMission extends NYIGMission {
-  _id: string;
-}
 
 export type AuroraCourses = {
   [school in NYIGSchool]: {

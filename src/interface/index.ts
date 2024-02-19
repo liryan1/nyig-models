@@ -4,6 +4,6 @@ export * from "./payment";
 export * from "./public";
 export * from "./reporting";
 export * from "./semester";
-export * from "./tournament";
+export * from "./event";
 export * from "./tracking";
 export * from "./user";

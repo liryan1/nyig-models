@@ -1,10 +1,8 @@
 import { z } from "zod";
-import { zUserRoles } from "./userRoles";
 import { GoRank } from "./goRank";
-import { extendZodObjectForMongoose } from "../mongoose";
-import { Types } from "mongoose";
+import { addAutoProps } from "../addAutoProps";
 
-export const zUser = z.object({
+export const zBUser = z.object({
   name: z.string().min(2).max(100),
   username: z.string().optional(),
   password: z.string().optional(),
@@ -30,13 +28,12 @@ export const zUser = z.object({
     })
     .optional(),
 });
-export const zMUser = extendZodObjectForMongoose(zUser);
+export const zUser = addAutoProps(zBUser);
 
 export const zStudent = zUser.extend({
   rank: z.nativeEnum(GoRank),
-  guardian: z.instanceof(Types.ObjectId).optional(),
+  guardian: z.string().optional(),
 });
-export const zMStudent = extendZodObjectForMongoose(zStudent);
 
 export const zTeacher = zUser.extend({
   rank: z.nativeEnum(GoRank),
@@ -67,11 +64,8 @@ export const zTeacher = zUser.extend({
    */
   available: z.array(z.array(z.array(z.number()))).optional(),
 });
-export const zMTeacher = extendZodObjectForMongoose(zTeacher);
 
-export type Student = z.infer<typeof zStudent>;
-export type MStudent = z.infer<typeof zMStudent>;
+export type BUser = z.infer<typeof zBUser>;
 export type User = z.infer<typeof zUser>;
-export type MUser = z.infer<typeof zMUser>;
+export type Student = z.infer<typeof zStudent>;
 export type Teacher = z.infer<typeof zTeacher>;
-export type MTeacher = z.infer<typeof zMTeacher>;

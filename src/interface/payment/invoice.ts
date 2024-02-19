@@ -1,7 +1,6 @@
-import { Types } from "mongoose";
 import { z } from "zod";
-import { extendZodObjectForMongoose } from "../mongoose";
 import { PaymentMethod } from "./paymentMethod";
+import { addAutoProps } from "../addAutoProps";
 
 export const zDiscount = z.object({
   desc: z.string(),
@@ -9,32 +8,31 @@ export const zDiscount = z.object({
 });
 
 export const zInvoiceItem = z.object({
-  course: z.instanceof(Types.ObjectId).or(z.string()),
+  course: z.string().min(1),
   price: z.number(),
   units: z.number(),
 });
 
 export const zInvoicePackage = z.object({
-  student: z.instanceof(Types.ObjectId).or(z.string()),
-  items: z.array(zInvoiceItem),
+  student: z.string(),
+  items: z.array(zInvoiceItem).min(1, "Package must contain at least one item"),
 });
 
-export const zInvoice = z.object({
-  billTo: z.string(),
-  packages: z.array(zInvoicePackage),
+export const zBInvoice = z.object({
+  billTo: z.string().min(1, "The 'Bill To' field must not be empty"),
+  packages: z.array(zInvoicePackage).min(1, "Invoice must include at least one package"),
   discounts: z.array(zDiscount),
-  textbook: z.number().int().min(1).optional(),
-  shipping: z.number().int().min(1).optional(),
+  textbook: z.number().int().min(0).optional(),
+  shipping: z.number().int().min(0).optional(),
   paid: z.nativeEnum(PaymentMethod).optional(),
   notes: z.string().optional(),
-  createdBy: z.instanceof(Types.ObjectId).or(z.string()),
-  lastEditBy: z.instanceof(Types.ObjectId).optional(),
+  createdBy: z.string(),
 });
 
-export const zMInvoice = extendZodObjectForMongoose(zInvoice);
+export const zInvoice = addAutoProps(zBInvoice);
 
 export type Discount = z.infer<typeof zDiscount>;
 export type InvoiceItem = z.infer<typeof zInvoiceItem>;
 export type InvoicePackage = z.infer<typeof zInvoicePackage>;
+export type BInvoice = z.infer<typeof zBInvoice>;
 export type Invoice = z.infer<typeof zInvoice>;
-export type MInvoice = z.infer<typeof zMInvoice>;

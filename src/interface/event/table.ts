@@ -9,7 +9,7 @@ export const zDetailsTable = z.object({
 
 export const zScheduleTable = z.object({
   fields: z.array(z.string()).length(2),
-  data: z.map(z.string(), zTable),
+  data: z.record(z.string(), zTable),
 });
 
 export type DetailsTable = z.infer<typeof zDetailsTable>;

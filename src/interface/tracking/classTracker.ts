@@ -1,12 +1,11 @@
-import { Types } from "mongoose";
 import { z } from "zod";
-import { extendZodObjectForMongoose } from "../mongoose";
 import { zTuition } from "../payment";
+import { addAutoProps } from "../addAutoProps";
 
-export const zClassTracker = z.object({
-  course: z.instanceof(Types.ObjectId).or(z.string()),
-  teacher: z.instanceof(Types.ObjectId).or(z.string()),
-  student: z.instanceof(Types.ObjectId).or(z.string()),
+export const zBClassTracker = z.object({
+  course: z.string(),
+  teacher: z.string(),
+  student: z.string(),
   classTimes: z.array(z.coerce.date()),
   completedList: z.array(z.boolean()),
   /**
@@ -19,7 +18,7 @@ export const zClassTracker = z.object({
   notes: z.string().optional(),
 });
 
-export const zMClassTracker = extendZodObjectForMongoose(zClassTracker);
+export const zClassTracker = addAutoProps(zBClassTracker);
 
+export type BClassTracker = z.infer<typeof zBClassTracker>;
 export type ClassTracker = z.infer<typeof zClassTracker>;
-export type MClassTracker = z.infer<typeof zMClassTracker>;

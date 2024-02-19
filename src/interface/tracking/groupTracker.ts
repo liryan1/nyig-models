@@ -1,13 +1,12 @@
 import { z } from "zod";
-import { extendZodObjectForMongoose } from "../mongoose";
 import { zScheduleData } from "./scheduleData";
 import { AgeGroup } from "../course";
-import { Types } from "mongoose";
+import { addAutoProps } from "../addAutoProps";
 
-export const zGroupTracker = z.object({
-  course: z.instanceof(Types.ObjectId).or(z.string()),
-  teacher: z.instanceof(Types.ObjectId).or(z.string()),
-  semester: z.instanceof(Types.ObjectId).or(z.string()),
+export const zBGroupTracker = z.object({
+  course: z.string(),
+  teacher: z.string(),
+  semester: z.string(),
   scheduleData: zScheduleData,
   /**
    * occurrences are tracked by week for Groups
@@ -16,7 +15,7 @@ export const zGroupTracker = z.object({
   /**
    * attendances are tracked by week for Groups
    */
-  attendances: z.array(z.instanceof(Types.ObjectId)),
+  attendances: z.array(z.string()),
   /**
    * public-facing ID of the course instance, e.g., 101
    */
@@ -32,7 +31,7 @@ export const zGroupTracker = z.object({
   notes: z.string().optional(),
 });
 
-export const zMGroupTracker = extendZodObjectForMongoose(zGroupTracker);
+export const zGroupTracker = addAutoProps(zBGroupTracker);
 
+export type BGroupTracker = z.infer<typeof zBGroupTracker>;
 export type GroupTracker = z.infer<typeof zGroupTracker>;
-export type MGroupTracker = z.infer<typeof zMGroupTracker>;

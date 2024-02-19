@@ -1,10 +1,10 @@
-import { Types } from "mongoose";
 import { z } from "zod";
-import { extendZodObjectForMongoose } from "../mongoose";
 import { zImageDef } from "../public";
+import { zEventTicket } from "./eTicket";
 import { zDetailsTable, zScheduleTable } from "./table";
+import { addAutoProps } from "../addAutoProps";
 
-export const zTConfig = z.object({
+export const zBEventConfig = z.object({
   /**
    * Location of the event
    */
@@ -51,7 +51,7 @@ export const zTConfig = z.object({
   /**
    * List of ticket object IDs for this tournament
    */
-  tickets: z.array(z.instanceof(Types.ObjectId)),
+  tickets: z.array(z.string()),
   /**
    * If false, the tournament registration is closed
    */
@@ -66,7 +66,12 @@ export const zTConfig = z.object({
   image: zImageDef.optional(),
 });
 
-export const zMTConfig = extendZodObjectForMongoose(zTConfig);
+export const zEventConfig = addAutoProps(zBEventConfig);
 
-export type TConfig = z.infer<typeof zTConfig>;
-export type MTConfig = z.infer<typeof zMTConfig>;
+export const zEventConfigResponse = zEventConfig.extend({
+  tickets: z.array(zEventTicket),
+});
+
+export type BEventConfig = z.infer<typeof zBEventConfig>;
+export type EventConfig = z.infer<typeof zEventConfig>;
+export type EventConfigResponse = z.infer<typeof zEventConfigResponse>;

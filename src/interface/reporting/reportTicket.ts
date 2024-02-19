@@ -1,17 +1,16 @@
-import { Types } from "mongoose";
 import { z } from "zod";
-import { extendZodObjectForMongoose } from "../mongoose";
 import { TicketStatus } from "./ticketStatus";
+import { addAutoProps } from "../addAutoProps";
 
-export const zReportTicket = z.object({
-  requester: z.instanceof(Types.ObjectId).or(z.string()),
-  resolver: z.instanceof(Types.ObjectId).or(z.string()).optional(),
+export const zBReportTicket = z.object({
+  requester: z.string(),
+  resolver: z.string().optional(),
   status: z.nativeEnum(TicketStatus),
   title: z.string(),
   description: z.string(),
 });
 
-export const zMReportTicket = extendZodObjectForMongoose(zReportTicket);
+export const zReportTicket = addAutoProps(zBReportTicket);
 
+export type BReportTicket = z.infer<typeof zBReportTicket>;
 export type ReportTicket = z.infer<typeof zReportTicket>;
-export type MReportTicket = z.infer<typeof zMReportTicket>;

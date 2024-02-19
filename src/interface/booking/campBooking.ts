@@ -1,11 +1,10 @@
-import { Types } from "mongoose";
 import { z } from "zod";
-import { extendZodObjectForMongoose } from "../mongoose";
 import { CampOption } from "../tracking";
 import { zBPaymentInfo } from "./bPaymentInfo";
 import { zBUserInfo } from "./bUserInfo";
+import { addAutoProps } from "../addAutoProps";
 
-export const zCampBooking = z
+export const zBCampBooking = z
   .object({
     ctId: z.string().optional(),
     isOnline: z.boolean(),
@@ -16,7 +15,7 @@ export const zCampBooking = z
   .merge(zBUserInfo)
   .merge(zBPaymentInfo);
 
-export const zMCampBooking = extendZodObjectForMongoose(zCampBooking);
+export const zCampBooking = addAutoProps(zBCampBooking);
 
+export type BCampBooking = z.infer<typeof zBCampBooking>;
 export type CampBooking = z.infer<typeof zCampBooking>;
-export type MCampBooking = z.infer<typeof zMCampBooking>;

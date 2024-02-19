@@ -1,9 +1,9 @@
 import { z } from "zod";
 import { CourseCategory } from "./category";
 import { NYIGSchool } from "./school";
-import { extendZodObjectForMongoose } from "../mongoose";
+import { addAutoProps } from "../addAutoProps";
 
-export const zCourse = z.object({
+export const zBCourse = z.object({
   name: z.string(),
   category: z.nativeEnum(CourseCategory),
   /**
@@ -46,7 +46,7 @@ export const zCourse = z.object({
     .min(1, "Tuition must not be less than or equal to 0")
     .optional(),
 });
-export const zMCourse = extendZodObjectForMongoose(zCourse);
+export const zCourse = addAutoProps(zBCourse);
 
+export type BCourse = z.infer<typeof zBCourse>;
 export type Course = z.infer<typeof zCourse>;
-export type MCourse = z.infer<typeof zMCourse>;

@@ -1,8 +1,7 @@
-import { Types } from "mongoose";
 import { z } from "zod";
 
 export const zBUserInfo = z.object({
-  userId: z.instanceof(Types.ObjectId).or(z.string()).optional(),
+  userId: z.string().optional(),
   firstName: z.string(),
   lastName: z.string(),
   rank: z.string(),

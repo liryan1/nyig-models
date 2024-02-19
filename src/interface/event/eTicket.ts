@@ -1,12 +1,12 @@
 import { z } from "zod";
-import { extendZodObjectForMongoose } from "../mongoose";
+import { addAutoProps } from "../addAutoProps";
 
-export const zTTicket = z.object({
-  name: z.string(),
+export const zBEventTicket = z.object({
+  name: z.string().min(5, "Name must be at least 5 characters"),
   /**
    * Price in cents
    */
-  price: z.number(),
+  price: z.number().min(1, "Price must be at least $1"),
   /**
    * @optional description of the ticket
    */
@@ -20,8 +20,7 @@ export const zTTicket = z.object({
    */
   lastBuyableDate: z.coerce.date().optional(),
 });
+export const zEventTicket = addAutoProps(zBEventTicket);
 
-export const zMTTicket = extendZodObjectForMongoose(zTTicket);
-
-export type TTicket = z.infer<typeof zTTicket>;
-export type MTTicket = z.infer<typeof zMTTicket>;
+export type BEventTicket = z.infer<typeof zBEventTicket>;
+export type EventTicket = z.infer<typeof zEventTicket>;

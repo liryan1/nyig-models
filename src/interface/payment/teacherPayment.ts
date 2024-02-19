@@ -1,6 +1,5 @@
-import { Types } from "mongoose";
 import { z } from "zod";
-import { extendZodObjectForMongoose } from "../mongoose";
+import { addAutoProps } from "../addAutoProps";
 
 export const zTeacherPaymentRow = z.object({
   course: z.string(),
@@ -9,14 +8,14 @@ export const zTeacherPaymentRow = z.object({
   wage: z.number(),
 });
 
-export const zTeacherPayment = z.object({
-  teacher: z.instanceof(Types.ObjectId).or(z.string()),
+export const zBTeacherPayment = z.object({
+  teacher: z.string(),
   rows: z.array(zTeacherPaymentRow),
   paid: z.boolean().optional(),
 });
 
-export const zMTeacherPayment = extendZodObjectForMongoose(zTeacherPayment);
+export const zTeacherPayment = addAutoProps(zBTeacherPayment);
 
 export type TeacherPaymentRow = z.infer<typeof zTeacherPaymentRow>;
+export type BTeacherPayment = z.infer<typeof zBTeacherPayment>;
 export type TeacherPayment = z.infer<typeof zTeacherPayment>;
-export type MTeacherPayment = z.infer<typeof zMTeacherPayment>;
