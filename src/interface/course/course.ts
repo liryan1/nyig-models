@@ -9,18 +9,18 @@ export const zBCourse = z.object({
   /**
    * @unit SECONDS - Duration of the course in seconds
    */
-  duration: z
+  duration: z.coerce
     .number()
     .int("Duration in seconds must be a whole number")
     .min(1, "Duration in seconds must not be less than or equal to 0"),
   /**
    * @unit CENTS - Price of the course in cents
    */
-  price: z
+  price: z.coerce
     .number()
     .int("Tuition must be a whole number in cents")
     .min(1, "Tuition must not be less than or equal to 0"),
-  description: z.string().optional(),
+  description: z.string().or(z.literal("")).optional(),
   /**
    * NYIG School locations
    */
@@ -28,11 +28,11 @@ export const zBCourse = z.object({
   /**
    * Recommended level before taking this course
    */
-  recLevel: z.string(),
+  recLevel: z.string().or(z.literal("")).optional(),
   /**
    * Camp tuition for half-day option
    */
-  halfCampTuition: z
+  halfCampTuition: z.coerce
     .number()
     .int("Tuition must be a whole number in cents")
     .min(1, "Tuition must not be less than or equal to 0")
@@ -40,7 +40,7 @@ export const zBCourse = z.object({
   /**
    * Camp tuition for full-day option
    */
-  fullCampTuition: z
+  fullCampTuition: z.coerce
     .number()
     .int("Tuition must be a whole number in cents")
     .min(1, "Tuition must not be less than or equal to 0")

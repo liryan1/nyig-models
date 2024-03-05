@@ -11,9 +11,9 @@ export const zBEventReg = z
     /**
      * @units CENTS - Donation in cents
      */
-    donation: z.number().optional(),
+    donation: z.coerce.number().optional(),
     /**
-     * How the registration was created, namely through public endpoint or admin
+     * How the registration was created, through public endpoint or admin
      */
     createMethod: z.string().optional(),
   })

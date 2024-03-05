@@ -9,8 +9,8 @@ import { z } from "zod";
 export function addAutoProps<T extends z.ZodRawShape>(original: z.ZodObject<T>) {
   return original.extend({
     _id: z.string(),
-    editedBy: z.string(),
-    createdAt: z.coerce.date().optional(),
-    updatedAt: z.coerce.date().optional(),
+    editedBy: z.string().optional(),
+    createdAt: z.string().optional(),
+    updatedAt: z.string().optional(),
   });
 }

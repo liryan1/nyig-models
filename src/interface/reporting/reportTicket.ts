@@ -1,6 +1,7 @@
 import { z } from "zod";
-import { TicketStatus } from "./ticketStatus";
 import { addAutoProps } from "../addAutoProps";
+import { zUser } from "../user";
+import { TicketStatus } from "./ticketStatus";
 
 export const zBReportTicket = z.object({
   requester: z.string(),
@@ -11,6 +12,11 @@ export const zBReportTicket = z.object({
 });
 
 export const zReportTicket = addAutoProps(zBReportTicket);
+export const zReportTicketResponse = zReportTicket.extend({
+  requester: zUser,
+  resolver: zUser.optional(),
+});
 
 export type BReportTicket = z.infer<typeof zBReportTicket>;
 export type ReportTicket = z.infer<typeof zReportTicket>;
+export type ReportTicketResponse = z.infer<typeof zReportTicketResponse>;

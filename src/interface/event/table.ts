@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-const zTable = z.array(z.object({}));
+const zTable = z.array(z.record(z.string(), z.string()));
 
 export const zDetailsTable = z.object({
   fields: z.array(z.string()).length(2),
