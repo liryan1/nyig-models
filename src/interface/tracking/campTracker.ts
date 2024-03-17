@@ -13,6 +13,7 @@ export const zBCampTracker = z.object({
    * attendances are tracked by week for camps
    */
   attendances: z.array(z.string()),
+  publicDescription: z.string().optional(),
   isNonPublic: z.boolean().optional(),
   notes: z.string().optional(),
 });
