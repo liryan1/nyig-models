@@ -1,11 +1,12 @@
 import { z } from "zod";
 import { addAutoProps } from "../addAutoProps";
+import { zUserRoles } from "./roles";
 
 export const zBUser = z.object({
   name: z.string().min(2).max(100),
   username: z.string().optional(),
   password: z.string().optional(),
-  roles: z.array(z.number().int()).optional(),
+  roles: zUserRoles.optional(),
   email: z.string().max(100).email().or(z.literal("")).optional(),
   address: z.string().or(z.literal("")).optional(),
   country: z

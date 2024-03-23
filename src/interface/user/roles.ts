@@ -8,7 +8,7 @@ export enum Role {
 
 export const zUserRoles = z.object({
   user: z.number().int(),
-  admin: z.number().int(),
-  superadmin: z.number().int(),
+  admin: z.number().int().optional(),
+  superadmin: z.number().int().optional(),
 });
 export type UserRoles = z.infer<typeof zUserRoles>;
