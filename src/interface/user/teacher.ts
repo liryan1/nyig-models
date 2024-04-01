@@ -31,7 +31,6 @@ export const zBTeacher = zBUser.extend({
    * ]
    */
   available: z.array(z.array(z.array(z.number()))).optional(),
-  shouldChangePassword: z.boolean().optional(),
 });
 export const zTeacher = addAutoProps(zBTeacher);
 
