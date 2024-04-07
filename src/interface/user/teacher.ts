@@ -37,7 +37,7 @@ export const zTeacher = addAutoProps(zBTeacher);
 const zTeacherResponse = zTeacher
   .omit({ password: true, roles: true, editedBy: true, updatedAt: true, createdAt: true })
   .extend({
-    role: z.string(),
+    role: z.number().int(),
   });
 
 export type BTeacher = z.infer<typeof zBTeacher>;
