@@ -45,6 +45,8 @@ export const zBCourse = z.object({
     .int("Tuition must be a whole number in cents")
     .min(1, "Tuition must not be less than or equal to 0")
     .optional(),
+
+  superadminOnly: z.boolean().optional(),
 });
 export const zCourse = addAutoProps(zBCourse);
 
