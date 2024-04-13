@@ -12,6 +12,9 @@ export const zBClassTracker = z.object({
    * Virtual mongoose field when all values in completedList is true
    */
   completed: z.boolean().optional(),
+  /**
+   * @deprecated This field is no longer used
+   */
   tuition: zTuition.optional(),
   paid: z.boolean().optional(),
   paused: z.boolean().optional(),

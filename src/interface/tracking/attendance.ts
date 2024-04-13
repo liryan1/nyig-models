@@ -8,7 +8,10 @@ import { zStudent } from "../user";
 export const zBAttendance = z.object({
   student: z.string(),
   states: z.array(z.nativeEnum(AttendState)),
-  tuition: zTuition,
+  /**
+   * @deprecated This field is no longer used
+   */
+  tuition: zTuition.optional(),
   paid: z.boolean().optional(),
   campOption: z.nativeEnum(CampOption).optional(),
 });
