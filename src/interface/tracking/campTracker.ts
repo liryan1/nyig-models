@@ -30,7 +30,7 @@ export const zCampTrackerResponse = zCampTracker.extend({
   course: zCourse,
   teacher: zTeacher,
   semester: zSemester,
-  attendances: zAttendance,
+  attendances: z.array(zAttendance),
 });
 
 export type BCampTracker = z.infer<typeof zBCampTracker>;
