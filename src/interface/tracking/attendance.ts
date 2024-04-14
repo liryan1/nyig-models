@@ -17,10 +17,14 @@ export const zBAttendance = z.object({
 });
 
 export const zAttendance = addAutoProps(zBAttendance);
+export const zAttendanceRequest = zAttendance.extend({
+  _id: z.string().optional(),
+});
 export const zAttendanceResponse = zAttendance.extend({
   student: zStudent,
 });
 
 export type BAttendance = z.infer<typeof zBAttendance>;
 export type Attendance = z.infer<typeof zAttendance>;
+export type AttendanceRequest = z.infer<typeof zAttendanceRequest>;
 export type AttendanceResponse = z.infer<typeof zAttendanceResponse>;

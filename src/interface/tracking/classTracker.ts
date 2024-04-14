@@ -1,6 +1,8 @@
 import { z } from "zod";
 import { zTuition } from "../payment";
 import { addAutoProps } from "../addAutoProps";
+import { zCourse } from "../course";
+import { zStudent, zTeacher } from "../user";
 
 export const zBClassTracker = z.object({
   course: z.string(),
@@ -22,6 +24,12 @@ export const zBClassTracker = z.object({
 });
 
 export const zClassTracker = addAutoProps(zBClassTracker);
+export const zClassTrackerResponse = zClassTracker.extend({
+  course: zCourse,
+  teacher: zTeacher,
+  student: zStudent,
+});
 
 export type BClassTracker = z.infer<typeof zBClassTracker>;
 export type ClassTracker = z.infer<typeof zClassTracker>;
+export type ClassTrackerResponse = z.infer<typeof zClassTrackerResponse>;
