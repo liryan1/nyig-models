@@ -3,7 +3,7 @@ import { addAutoProps } from "../addAutoProps";
 import { zSemester } from "../semester";
 import { zTeacher } from "../user";
 import { zCourse } from "../course";
-import { zAttendance, zAttendanceRequest } from "./attendance";
+import { zAttendance, zAttendanceRequest, zAttendanceResponse } from "./attendance";
 
 export const zBCampTracker = z.object({
   course: z.string(),
@@ -24,13 +24,13 @@ export const zBCampTracker = z.object({
 
 export const zCampTracker = addAutoProps(zBCampTracker);
 export const zCampTrackerRequest = zCampTracker.extend({
-  attendances: zAttendanceRequest,
+  attendances: z.array(zAttendanceRequest),
 });
 export const zCampTrackerResponse = zCampTracker.extend({
   course: zCourse,
   teacher: zTeacher,
   semester: zSemester,
-  attendances: z.array(zAttendance),
+  attendances: z.array(zAttendanceResponse),
 });
 
 export type BCampTracker = z.infer<typeof zBCampTracker>;
