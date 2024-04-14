@@ -16,16 +16,13 @@ export const zBCampTracker = z.object({
   /**
    * attendances are tracked by week for camps
    */
-  attendances: z.array(z.string()),
+  attendances: z.array(zAttendanceRequest),
   publicDescription: z.string().optional(),
   isNonPublic: z.boolean().optional(),
   notes: z.string().optional(),
 });
 
 export const zCampTracker = addAutoProps(zBCampTracker);
-export const zCampTrackerRequest = zCampTracker.extend({
-  attendances: z.array(zAttendanceRequest),
-});
 export const zCampTrackerResponse = zCampTracker.extend({
   course: zCourse,
   teacher: zTeacher,
@@ -35,5 +32,4 @@ export const zCampTrackerResponse = zCampTracker.extend({
 
 export type BCampTracker = z.infer<typeof zBCampTracker>;
 export type CampTracker = z.infer<typeof zCampTracker>;
-export type CampTrackerRequest = z.infer<typeof zCampTrackerRequest>;
 export type CampTrackerResponse = z.infer<typeof zCampTrackerResponse>;
