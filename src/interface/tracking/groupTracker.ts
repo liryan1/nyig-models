@@ -1,7 +1,10 @@
 import { z } from "zod";
 import { zScheduleData } from "./scheduleData";
-import { AgeGroup } from "../course";
+import { AgeGroup, zCourse } from "../course";
 import { addAutoProps } from "../addAutoProps";
+import { zTeacher } from "../user";
+import { zSemester } from "../semester";
+import { zAttendanceRequest, zAttendanceResponse } from "./attendance";
 
 export const zBGroupTracker = z.object({
   course: z.string(),
@@ -11,11 +14,11 @@ export const zBGroupTracker = z.object({
   /**
    * occurrences are tracked by week for Groups
    */
-  occurrences: z.array(z.coerce.date()),
+  occurrences: z.array(z.string()),
   /**
    * attendances are tracked by week for Groups
    */
-  attendances: z.array(z.string()),
+  attendances: z.array(zAttendanceRequest),
   /**
    * public-facing ID of the course instance, e.g., 101
    */
@@ -33,5 +36,13 @@ export const zBGroupTracker = z.object({
 
 export const zGroupTracker = addAutoProps(zBGroupTracker);
 
+export const zGroupTrackerResponse = zGroupTracker.extend({
+  course: zCourse,
+  teacher: zTeacher,
+  semester: zSemester,
+  attendances: z.array(zAttendanceResponse),
+});
+
 export type BGroupTracker = z.infer<typeof zBGroupTracker>;
 export type GroupTracker = z.infer<typeof zGroupTracker>;
+export type GroupTrackerResponse = z.infer<typeof zGroupTrackerResponse>;

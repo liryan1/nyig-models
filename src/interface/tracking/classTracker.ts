@@ -1,8 +1,10 @@
 import { z } from "zod";
-import { zTuition } from "../payment";
 import { addAutoProps } from "../addAutoProps";
 import { zCourse } from "../course";
 import { zStudent, zTeacher } from "../user";
+import { zClassTimesInput } from "./classTimesInput";
+
+export type ClassTimesInput = z.infer<typeof zClassTimesInput>;
 
 export const zBClassTracker = z.object({
   course: z.string(),
@@ -17,7 +19,6 @@ export const zBClassTracker = z.object({
   /**
    * @deprecated This field is no longer used
    */
-  tuition: zTuition.optional(),
   paid: z.boolean().optional(),
   paused: z.boolean().optional(),
   notes: z.string().optional(),
@@ -29,6 +30,11 @@ export const zClassTrackerResponse = zClassTracker.extend({
   teacher: zTeacher,
   student: zStudent,
 });
+
+export const zTrackerCreate = zBClassTracker.extend({
+  classTimesInput: zClassTimesInput,
+});
+export type TrackerCreate = z.infer<typeof zTrackerCreate>;
 
 export type BClassTracker = z.infer<typeof zBClassTracker>;
 export type ClassTracker = z.infer<typeof zClassTracker>;

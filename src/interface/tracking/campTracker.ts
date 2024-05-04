@@ -1,9 +1,9 @@
 import { z } from "zod";
 import { addAutoProps } from "../addAutoProps";
+import { zCourse } from "../course";
 import { zSemester } from "../semester";
 import { zTeacher } from "../user";
-import { zCourse } from "../course";
-import { zAttendance, zAttendanceRequest, zAttendanceResponse } from "./attendance";
+import { zAttendanceRequest, zAttendanceResponse } from "./attendance";
 
 export const zBCampTracker = z.object({
   course: z.string(),
