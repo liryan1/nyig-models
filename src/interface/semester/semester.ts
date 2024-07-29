@@ -4,7 +4,7 @@ import { addAutoProps } from "../addAutoProps";
 
 export const zBSemester = z.object({
   season: z.nativeEnum(Season),
-  year: z.number().min(2022).max(2999),
+  year: z.coerce.number().min(2022).max(2999),
   startDate: z.coerce.date(),
   endDate: z.coerce.date(),
   /**

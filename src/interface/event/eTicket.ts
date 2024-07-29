@@ -2,11 +2,11 @@ import { z } from "zod";
 import { addAutoProps } from "../addAutoProps";
 
 export const zBEventTicket = z.object({
-  name: z.string().min(5, "Name must be at least 5 characters"),
+  name: z.string().min(4, "Name must be at least 4 characters"),
   /**
    * Price in cents
    */
-  price: z.number().min(1, "Price must be at least $1"),
+  price: z.number().min(0, "Price must not be negative"),
   /**
    * @optional description of the ticket
    */
