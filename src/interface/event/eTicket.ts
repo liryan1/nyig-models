@@ -6,7 +6,7 @@ export const zBEventTicket = z.object({
   /**
    * Price in cents
    */
-  price: z.number().min(0, "Price must not be negative"),
+  price: z.coerce.number().min(0, "Price must not be negative"),
   /**
    * @optional description of the ticket
    */
