@@ -4,3 +4,4 @@ export * from "./bookingType";
 export * from "./campBooking";
 export * from "./groupBooking";
 export * from "./privateBooking";
+export * from "./hearAboutUs";
