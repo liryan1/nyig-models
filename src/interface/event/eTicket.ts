@@ -19,6 +19,10 @@ export const zBEventTicket = z.object({
    *  @optional If date is provided and in the past, ticket cannot be purchased
    */
   lastBuyableDate: z.coerce.date().optional(),
+  /**
+   *  @optional limit is 1 unless maxPerOrder is specified
+   */
+  maxPerOrder: z.number().int().min(2).optional(),
 });
 export const zEventTicket = addAutoProps(zBEventTicket);
 
