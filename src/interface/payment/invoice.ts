@@ -30,6 +30,7 @@ export const zBInvoice = z.object({
   textbook: z.coerce.number().int().min(0).optional(),
   shipping: z.coerce.number().int().min(0).optional(),
   paid: z.nativeEnum(PaymentMethod).optional(),
+  paidAt: z.string().optional(),
   showEin: z.boolean().optional(),
   notes: z.string().or(z.literal("")).optional(),
   createdBy: z.string(),

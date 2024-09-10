@@ -20,7 +20,7 @@ export const zBEventTicket = z.object({
    */
   lastBuyableDate: z.coerce.date().optional(),
   /**
-   *  @optional limit is 1 unless maxPerOrder is specified
+   *  @optional max limit is 1 unless maxPerOrder is specified
    */
   maxPerOrder: z.number().int().min(2).optional(),
 });
