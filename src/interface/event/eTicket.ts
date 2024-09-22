@@ -22,7 +22,7 @@ export const zBEventTicket = z.object({
   /**
    *  @optional max limit is 1 unless maxPerOrder is specified
    */
-  maxPerOrder: z.number().int().min(2).optional(),
+  maxPerOrder: z.coerce.number().int().min(2).optional(),
 });
 export const zEventTicket = addAutoProps(zBEventTicket);
 
