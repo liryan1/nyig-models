@@ -10,6 +10,10 @@ export const zBTeacher = zBUser.extend({
    */
   isInactive: z.boolean().optional(),
   /**
+   * If true, teacher is never available for booking
+   */
+  doesNotTeachPrivateLessons: z.boolean().optional(),
+  /**
    * Teacher's position, e.g., instructor, president
    */
   title: z.string().optional(),
