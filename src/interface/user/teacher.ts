@@ -22,6 +22,10 @@ export const zBTeacher = zBUser.extend({
    * new lines will be rendered as paragraphs
    */
   bio: z.string().optional(),
+  /**
+   * Permanent URL of the image
+   */
+  imageUrl: z.string().optional(),
   /** Format is illustrated below, where teacher is available
    * Mon 9-12am 3-6pm & Tue 10-12am 6-10pm
    * [
