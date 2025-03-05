@@ -75,3 +75,13 @@ export const zEventConfigResponse = zEventConfig.extend({
 export type BEventConfig = z.infer<typeof zBEventConfig>;
 export type EventConfig = z.infer<typeof zEventConfig>;
 export type EventConfigResponse = z.infer<typeof zEventConfigResponse>;
+
+/**
+ * For public endpoints
+ */
+export interface PublicEventConfigResponse extends EventConfigResponse {
+  registrationStats: {
+    totalConfirmed: number;
+    whoIsComing: { name: string; rank: string }[];
+  };
+}
