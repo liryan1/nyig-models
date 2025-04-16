@@ -1,6 +1,5 @@
 import { z } from "zod";
 import { addAutoProps } from "../addAutoProps";
-import { zTeacher } from "../user";
 
 export const zTeacherPaymentRow = z.object({
   course: z.string().min(1, "select or enter a course"),
@@ -13,12 +12,17 @@ export const zBTeacherPayment = z.object({
   teacher: z.string().min(1, "select or enter a teacher"),
   rows: z.array(zTeacherPaymentRow),
   paid: z.boolean().optional(),
+  /**
+   * paymentNotes differentiates from notes as it is displayed on the rendered PDF
+   */
+  paymentNotes: z.string().optional(),
 });
 
 export const zTeacherPayment = addAutoProps(zBTeacherPayment);
 
 export const zTeacherPaymentResponse = zTeacherPayment.extend({
-  teacher: zTeacher,
+  teacher: z.object({ name: z.string(), rank: z.string().optional() }),
+  editedBy: z.object({ name: z.string(), rank: z.string().optional() }),
 });
 
 export type TeacherPaymentRow = z.infer<typeof zTeacherPaymentRow>;
