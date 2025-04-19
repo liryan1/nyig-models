@@ -1,6 +1,6 @@
 {
   "name": "@nyig/models",
-  "version": "0.4.13",
+  "version": "0.4.14",
   "license": "MIT",
   "main": "index.js",
   "module": "index.mjs",
@@ -15,15 +15,15 @@
     "release": "pnpm run build && changeset publish"
   },
   "peerDependencies": {
-    "zod": ">=3.22.4"
+    "zod": ">=3.24.3"
   },
   "devDependencies": {
-    "@changesets/cli": "^2.27.7",
-    "husky": "^9.1.5",
-    "lint-staged": "^15.2.9",
-    "prettier": "^3.3.3",
-    "tsup": "^8.2.4",
-    "typescript": "^5.5.4"
+    "@changesets/cli": "^2.29.2",
+    "husky": "^9.1.7",
+    "lint-staged": "^15.5.1",
+    "prettier": "^3.5.3",
+    "tsup": "^8.4.0",
+    "typescript": "^5.8.3"
   },
   "lint-staged": {
     "*.{js,ts,md}": "prettier --write"

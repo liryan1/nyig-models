@@ -57,6 +57,11 @@ export const zBEventConfig = z.object({
    */
   canRegister: z.boolean(),
   /**
+   * If true, the tournament is youth only.
+   * example: registration requires a date of birth to confirm.
+   */
+  isYouth: z.boolean(),
+  /**
    * If true, free form donation amounts are disabled.
    */
   donationsDisabled: z.boolean().optional(),

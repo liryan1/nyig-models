@@ -16,6 +16,8 @@ export const zBUserInfo = z.object({
   hearAboutUsDetails: z.string().optional(),
   // show/hide on Aurora event page "who is coming" list
   showOnWhoIsComing: z.boolean().optional(),
+  // Required for youth tournaments
+  dateOfBirth: z.string().optional(),
 });
 
 export type BUserInfo = z.infer<typeof zBUserInfo>;
