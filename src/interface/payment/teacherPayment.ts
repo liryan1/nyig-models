@@ -21,8 +21,8 @@ export const zBTeacherPayment = z.object({
 export const zTeacherPayment = addAutoProps(zBTeacherPayment);
 
 export const zTeacherPaymentResponse = zTeacherPayment.extend({
-  teacher: z.object({ name: z.string(), rank: z.string().optional() }),
-  editedBy: z.object({ name: z.string(), rank: z.string().optional() }),
+  teacher: z.object({ _id: z.string(), name: z.string(), rank: z.string().optional() }),
+  editedBy: z.object({ _id: z.string(), name: z.string(), rank: z.string().optional() }),
 });
 
 export type TeacherPaymentRow = z.infer<typeof zTeacherPaymentRow>;
