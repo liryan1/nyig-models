@@ -7,3 +7,8 @@ export const zTuition = z.object({
 });
 
 export type Tuition = z.infer<typeof zTuition>;
+
+export enum FeesInCents {
+  "MATERIAL" = 100_00,
+  "SHIPPING" = 20_00,
+}
