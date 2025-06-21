@@ -34,13 +34,12 @@ export const zBInvoice = z.object({
   showEin: z.boolean().optional(),
   notes: z.string().or(z.literal("")).optional(),
   createdBy: z.string(),
-  lastEditBy: z.string().optional(),
 });
 
 export const zInvoice = addAutoProps(zBInvoice);
 export const zInvoiceResponse = zInvoice.extend({
   createdBy: zTeacher,
-  lastEditBy: zTeacher.optional(),
+  editedBy: zTeacher.optional(),
   packages: z.array(zInvoicePackageResponse),
 });
 
