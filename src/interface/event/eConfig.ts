@@ -17,11 +17,11 @@ export const zBEventConfig = z.object({
   /**
    * Full name of the tournament
    */
-  title: z.string(),
+  title: z.string().min(5),
   /**
    * Abbreviated title of the tournament
    */
-  shortTitle: z.string(),
+  shortTitle: z.string().min(2),
   /**
    * Tournament start date and time
    */
@@ -33,11 +33,11 @@ export const zBEventConfig = z.object({
   /**
    * Short description for tournament card
    */
-  shortDescription: z.string(),
+  shortDescription: z.string().min(5),
   /**
    * Full description
    */
-  description: z.string(),
+  description: z.string().min(5),
   /**
    * Defines the tournament details table with 2 columns
    * typically Time and Event
