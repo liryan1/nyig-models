@@ -49,6 +49,16 @@ export const zBEventConfig = z.object({
    */
   schedule: zScheduleTable,
   /**
+   * @optional description of the tickets step, shown in service
+   * when the customer is on step 1 of the booking page
+   */
+  ticketsStepDescription: z.string().optional(),
+  /**
+   * @optional description of the participant step, shown in service
+   * when the customer is on step 2 of the booking page
+   */
+  participantStepDescription: z.string().optional(),
+  /**
    * List of ticket object IDs for this tournament
    */
   tickets: z.array(z.string()),
