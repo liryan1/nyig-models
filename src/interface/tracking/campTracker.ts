@@ -5,9 +5,14 @@ import { zSemester } from "../semester";
 import { zTeacher } from "../user";
 import { zAttendanceRequest, zAttendanceResponse } from "./attendance";
 
+const MAX_TEACHERS = 10;
+
 export const zBCampTracker = z.object({
   course: z.string(),
-  teacher: z.string(),
+  teacher: z
+    .array(z.string())
+    .min(1, "Camp must have at least 1 teacher")
+    .max(MAX_TEACHERS, `Camp can have at most ${MAX_TEACHERS} teachers`),
   semester: z.string(),
   /**
    * occurrences are tracked by week for camps
@@ -25,7 +30,10 @@ export const zBCampTracker = z.object({
 export const zCampTracker = addAutoProps(zBCampTracker);
 export const zCampTrackerResponse = zCampTracker.extend({
   course: zCourse,
-  teacher: zTeacher,
+  teacher: z
+    .array(zTeacher)
+    .min(1, "Camp must have at least 1 teacher")
+    .max(MAX_TEACHERS, `Camp can have at most ${MAX_TEACHERS} teachers`),
   semester: zSemester,
   attendances: z.array(zAttendanceResponse),
 });
