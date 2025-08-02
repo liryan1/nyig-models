@@ -9,7 +9,7 @@ const MAX_TEACHERS = 10;
 
 export const zBCampTracker = z.object({
   course: z.string(),
-  teacher: z
+  teachers: z
     .array(z.string())
     .min(1, "Camp must have at least 1 teacher")
     .max(MAX_TEACHERS, `Camp can have at most ${MAX_TEACHERS} teachers`),
@@ -30,7 +30,7 @@ export const zBCampTracker = z.object({
 export const zCampTracker = addAutoProps(zBCampTracker);
 export const zCampTrackerResponse = zCampTracker.extend({
   course: zCourse,
-  teacher: z
+  teachers: z
     .array(zTeacher)
     .min(1, "Camp must have at least 1 teacher")
     .max(MAX_TEACHERS, `Camp can have at most ${MAX_TEACHERS} teachers`),
