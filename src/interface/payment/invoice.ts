@@ -33,6 +33,7 @@ export const zBInvoice = z.object({
   paidAt: z.string().optional(),
   showEin: z.boolean().optional(),
   notes: z.string().or(z.literal("")).optional(),
+  feeLabel: z.string().optional(),
   createdBy: z.string(),
 });
 
