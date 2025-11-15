@@ -3,6 +3,7 @@ import { zImageDef } from "../public";
 import { zEventTicket } from "./eTicket";
 import { zDetailsTable, zScheduleTable } from "./table";
 import { addAutoProps } from "../addAutoProps";
+import { YouthOrAdult } from "./youthOrAdult";
 
 export const zBEventConfig = z.object({
   /**
@@ -67,10 +68,11 @@ export const zBEventConfig = z.object({
    */
   canRegister: z.boolean(),
   /**
-   * If true, the tournament is youth only.
-   * example: registration requires a date of birth to confirm.
+   * Defines the registration of youth and adults in the event
+   * youth_only - only youth
+   * both - both youth and adult
    */
-  isYouth: z.boolean(),
+  youthOrAdult: z.nativeEnum(YouthOrAdult),
   /**
    * If true, free form donation amounts are disabled.
    */
