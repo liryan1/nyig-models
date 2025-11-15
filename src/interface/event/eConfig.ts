@@ -72,7 +72,7 @@ export const zBEventConfig = z.object({
    * youth_only - only youth
    * both - both youth and adult
    */
-  youthOrAdult: z.nativeEnum(YouthOrAdult),
+  youthOrAdult: z.nativeEnum(YouthOrAdult).optional(),
   /**
    * If true, free form donation amounts are disabled.
    */
