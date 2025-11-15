@@ -16,6 +16,7 @@ export const zBUserInfo = z.object({
   hearAboutUsDetails: z.string().optional(),
   // show/hide on Aurora event page "who is coming" list
   showOnWhoIsComing: z.boolean().optional(),
+  participateAs: z.enum(["adult", "youth"]).optional(),
   // Required for youth tournaments
   dateOfBirth: z.string().optional(),
 });
