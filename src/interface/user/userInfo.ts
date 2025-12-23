@@ -2,7 +2,7 @@ import { z } from "zod";
 import { addAutoProps } from "../addAutoProps";
 import { GoRank } from "./goRank";
 
-export const zBUserInfo = z.object({
+export const zBUserProfile = z.object({
   firstName: z.string().min(2).max(50).or(z.literal("")).optional(),
   lastName: z.string().min(2).max(50).or(z.literal("")).optional(),
   address: z.string().or(z.literal("")).optional(),
@@ -32,6 +32,6 @@ export const zBUserInfo = z.object({
     .or(z.literal(""))
     .optional(),
 });
-export const zUserInfo = addAutoProps(zBUserInfo);
+export const zUserProfile = addAutoProps(zBUserProfile);
 
-export type UserInfo = z.infer<typeof zUserInfo>;
+export type UserProfile = z.infer<typeof zUserProfile>;
