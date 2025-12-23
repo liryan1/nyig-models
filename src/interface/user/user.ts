@@ -34,6 +34,10 @@ export const zBUser = z.object({
    * For prompting the user to change their password on first login
    */
   shouldChangePassword: z.boolean().optional(),
+  /**
+   * Object storing user preferences
+   */
+  info: z.string().optional(),
 });
 export const zUser = addAutoProps(zBUser);
 
