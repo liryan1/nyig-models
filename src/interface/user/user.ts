@@ -35,9 +35,9 @@ export const zBUser = z.object({
    */
   shouldChangePassword: z.boolean().optional(),
   /**
-   * Object storing user preferences
+   * UserProfile Object storing user preferences
    */
-  info: z.string().optional(),
+  profile: z.string().optional(),
 });
 export const zUser = addAutoProps(zBUser);
 
