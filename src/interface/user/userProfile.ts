@@ -6,7 +6,7 @@ export const zBUserProfile = z.object({
   firstName: z.string().min(2).max(50).or(z.literal("")).optional(),
   lastName: z.string().min(2).max(50).or(z.literal("")).optional(),
   address: z.string().or(z.literal("")).optional(),
-  rank: z.enum(GoRank).optional(),
+  rank: z.nativeEnum(GoRank).optional(),
   agaId: z
     .string()
     .regex(/^\d{4,5}$/, {
@@ -16,7 +16,7 @@ export const zBUserProfile = z.object({
     .optional(),
   participateAs: z.enum(["adult", "youth"]).optional(),
   showOnWhoIsComing: z.boolean().optional(),
-  preferredEmail: z.email().optional(),
+  preferredEmail: z.string().email().optional(),
   phoneNumber: z
     .string()
     .regex(/^\d{10}/, {
