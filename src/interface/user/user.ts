@@ -1,6 +1,7 @@
 import { z } from "zod";
 import { addAutoProps } from "../addAutoProps";
 import { zUserRoles } from "./roles";
+import { zUserProfile } from "./userProfile";
 
 export const zBUser = z.object({
   name: z.string().min(2).max(100),
@@ -37,7 +38,7 @@ export const zBUser = z.object({
   /**
    * UserProfile Object storing user preferences
    */
-  profile: z.string().optional(),
+  profiles: z.array(zUserProfile).optional(),
 });
 export const zUser = addAutoProps(zBUser);
 
