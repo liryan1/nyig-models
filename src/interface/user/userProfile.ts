@@ -3,20 +3,16 @@ import { addAutoProps } from "../addAutoProps";
 import { GoRank } from "./goRank";
 
 export const zBUserProfile = z.object({
-  firstName: z.string().min(2).max(50).or(z.literal("")).optional(),
-  lastName: z.string().min(2).max(50).or(z.literal("")).optional(),
-  address: z.string().or(z.literal("")).optional(),
+  firstName: z.string().min(2).max(50),
+  lastName: z.string().min(2).max(50),
   rank: z.nativeEnum(GoRank).optional(),
-  agaId: z
-    .string()
-    .regex(/^\d{4,5}$/, {
-      message: `Please enter a valid AGA ID`,
-    })
-    .or(z.literal(""))
-    .optional(),
-  participateAs: z.enum(["adult", "youth"]).optional(),
+  agaId: z.string().regex(/^\d{4,5}$/, {
+    message: `Please enter a valid AGA ID`,
+  }),
+  address: z.string().or(z.literal("")).optional(),
+  participateAs: z.enum(["adult", "youth"]).or(z.literal("")).optional(),
   showOnWhoIsComing: z.boolean().optional(),
-  preferredEmail: z.string().email().optional(),
+  preferredEmail: z.string().email().or(z.literal("")).optional(),
   phoneNumber: z
     .string()
     .regex(/^\d{10}/, {
