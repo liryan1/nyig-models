@@ -1,7 +1,6 @@
 import { z } from "zod";
 import { zImageDef } from "../public";
 import { zEventTicket } from "./eTicket";
-import { zDetailsTable, zScheduleTable } from "./table";
 import { addAutoProps } from "../addAutoProps";
 import { YouthOrAdult } from "./youthOrAdult";
 
@@ -40,15 +39,15 @@ export const zBEventConfig = z.object({
    */
   description: z.string().min(5),
   /**
-   * Defines the tournament details table with 2 columns
-   * typically Time and Event
+   * @deprecated
+   * info in description field, kept for backwards compatibility
    */
-  details: zDetailsTable,
+  details: z.any().optional(),
   /**
-   * Defines the tournament schedule.
-   * data is a map of tab title -> 2 column table rows.
+   * @deprecated
+   * info in description field, kept for backwards compatibility
    */
-  schedule: zScheduleTable,
+  schedule: z.any().optional(),
   /**
    * @optional description of the tickets step, shown in service
    * when the customer is on step 1 of the booking page
