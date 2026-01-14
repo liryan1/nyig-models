@@ -5,8 +5,6 @@ import { zUserProfile } from "./userProfile";
 
 export const zBUser = z.object({
   name: z.string().min(2).max(100),
-  username: z.string().optional(),
-  password: z.string().optional(),
   roles: zUserRoles.optional(),
   email: z.string().max(100).email().or(z.literal("")).optional(),
   address: z.string().or(z.literal("")).optional(),

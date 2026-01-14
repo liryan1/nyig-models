@@ -22,9 +22,14 @@ export const zBCourse = z.object({
     .min(1, "Tuition must not be less than or equal to 0"),
   description: z.string().or(z.literal("")).optional(),
   /**
-   * NYIG School locations
+   * NYIG School location
+   * @deprecated
    */
-  nyigSchool: z.nativeEnum(NYIGSchool),
+  nyigSchool: z.nativeEnum(NYIGSchool).optional(),
+  /**
+   * NYIG School locations the course is offered at
+   */
+  schools: z.array(z.nativeEnum(NYIGSchool)).optional(),
   /**
    * Recommended level before taking this course
    */

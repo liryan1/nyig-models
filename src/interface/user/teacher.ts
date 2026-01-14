@@ -2,6 +2,7 @@ import { z } from "zod";
 import { GoRank } from "./goRank";
 import { addAutoProps } from "../addAutoProps";
 import { zBUser } from "./user";
+import { NYIGSchool } from "../course";
 
 export const zBTeacher = zBUser.extend({
   rank: z.nativeEnum(GoRank),
@@ -39,11 +40,16 @@ export const zBTeacher = zBUser.extend({
    * ]
    */
   available: z.array(z.array(z.array(z.number()))).optional(),
+  /**
+   * Schools the teacher is affiliated with
+   * Required for showing on the aurora "about" page
+   */
+  schools: z.array(z.nativeEnum(NYIGSchool)).optional(),
 });
 export const zTeacher = addAutoProps(zBTeacher);
 
 const zTeacherResponse = zTeacher
-  .omit({ password: true, roles: true, editedBy: true, updatedAt: true, createdAt: true })
+  .omit({ roles: true, editedBy: true, updatedAt: true, createdAt: true })
   .extend({
     role: z.number().int(),
   });
