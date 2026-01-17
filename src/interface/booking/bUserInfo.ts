@@ -19,6 +19,8 @@ export const zBUserInfo = z.object({
   participateAs: z.enum(["adult", "youth"]).optional(),
   // Required for youth tournaments
   dateOfBirth: z.string().optional(),
+  // Track the selected user profile
+  profileId: z.string().optional(),
 });
 
 export type BUserInfo = z.infer<typeof zBUserInfo>;

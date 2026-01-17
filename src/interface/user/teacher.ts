@@ -44,7 +44,9 @@ export const zBTeacher = zBUser.extend({
    * Schools the teacher is affiliated with
    * Required for showing on the aurora "about" page
    */
-  schools: z.array(z.nativeEnum(NYIGSchool)).optional(),
+  schools: z
+    .array(z.nativeEnum(NYIGSchool))
+    .min(1, "Teachers must be affiliated with at least one school"),
 });
 export const zTeacher = addAutoProps(zBTeacher);
 
