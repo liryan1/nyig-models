@@ -7,3 +7,4 @@ export * from "./semester";
 export * from "./event";
 export * from "./tracking";
 export * from "./user";
+export * from "./products";
