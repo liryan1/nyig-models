@@ -3,5 +3,4 @@ export enum CourseCategory {
   PRIVATE = "private",
   SEMIPRIVATE = "semiprivate",
   CAMP = "camp",
-  EVENT = "event",
 }
