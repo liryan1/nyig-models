@@ -1,5 +1,6 @@
 import { z } from "zod";
 import { addAutoProps } from "./addAutoProps";
+import { zUser } from "./user";
 
 export const zBProduct = z.object({
   name: z.string().min(1, "Name is required"),
@@ -7,7 +8,11 @@ export const zBProduct = z.object({
   notes: z.string().optional(),
 });
 
-const zProduct = addAutoProps(zBProduct);
+export const zProduct = addAutoProps(zBProduct);
+export const zProductResponse = zProduct.extend({
+  editedBy: zUser,
+});
 
 export type BProduct = z.infer<typeof zBProduct>;
 export type Product = z.infer<typeof zProduct>;
+export type ProductResponse = z.infer<typeof zProductResponse>;
