@@ -5,6 +5,15 @@
   "main": "index.js",
   "module": "index.mjs",
   "types": "index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/liryan1/nyig-models.git"
+  },
+  "publishConfig": {
+    "access": "public",
+    "directory": "dist",
+    "provenance": true
+  },
   "scripts": {
     "build": "tsup src/index.ts --format cjs,esm --dts",
     "clean": "rm -rf dist node_modules",
@@ -27,8 +36,5 @@
   },
   "lint-staged": {
     "*.{js,ts,md}": "prettier --write"
-  },
-  "publishConfig": {
-    "directory": "dist"
   }
 }
