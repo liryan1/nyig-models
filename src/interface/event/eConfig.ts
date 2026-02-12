@@ -60,7 +60,7 @@ export const zBEventConfig = z.object({
    * If false, the tournament is not viewable in public APIs
    * admin console can still see it
    */
-  isHidden: z.boolean(),
+  isHidden: z.boolean().optional(),
   /**
    * Defines the registration of youth and adults in the event
    */
