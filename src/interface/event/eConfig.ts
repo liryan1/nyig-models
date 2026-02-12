@@ -39,16 +39,6 @@ export const zBEventConfig = z.object({
    */
   description: z.string().min(5),
   /**
-   * @deprecated
-   * info in description field, kept for backwards compatibility
-   */
-  details: z.any().optional(),
-  /**
-   * @deprecated
-   * info in description field, kept for backwards compatibility
-   */
-  schedule: z.any().optional(),
-  /**
    * @optional description of the tickets step, shown in service
    * when the customer is on step 1 of the booking page
    */
@@ -67,9 +57,12 @@ export const zBEventConfig = z.object({
    */
   canRegister: z.boolean(),
   /**
+   * If false, the tournament is not viewable in public APIs
+   * admin console can still see it
+   */
+  isHidden: z.boolean(),
+  /**
    * Defines the registration of youth and adults in the event
-   * youth_only - only youth
-   * both - both youth and adult
    */
   youthOrAdult: z.nativeEnum(YouthOrAdult).optional(),
   /**
