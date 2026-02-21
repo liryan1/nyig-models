@@ -12,5 +12,6 @@ export function addAutoProps<T extends z.ZodRawShape>(original: z.ZodObject<T>) 
     editedBy: z.string().optional(),
     createdAt: z.string().optional(),
     updatedAt: z.string().optional(),
+    isDeleted: z.string().optional(),
   });
 }
