@@ -2,6 +2,7 @@ import { z } from "zod";
 import { CourseCategory } from "./category";
 import { NYIGSchool } from "./school";
 import { addAutoProps } from "../addAutoProps";
+import { zBUser } from "../user";
 
 export const zBCourse = z.object({
   name: z.string(),
@@ -48,7 +49,12 @@ export const zBCourse = z.object({
 
   superadminOnly: z.boolean().optional(),
 });
+
 export const zCourse = addAutoProps(zBCourse);
+const zCourseResponse = zCourse.extend({
+  editedBy: zBUser,
+});
 
 export type BCourse = z.infer<typeof zBCourse>;
 export type Course = z.infer<typeof zCourse>;
+export type CourseResponse = z.infer<typeof zCourseResponse>;
