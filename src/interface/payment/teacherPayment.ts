@@ -1,5 +1,29 @@
 import { z } from "zod";
-import { addAutoProps } from "../addAutoProps";
+import { addAutoProps, type AutoProps } from "../addAutoProps";
+
+export interface TeacherPaymentRow {
+  course: string;
+  length: number;
+  count: number;
+  wage: number;
+}
+
+export interface BTeacherPayment {
+  teacher: string;
+  rows: TeacherPaymentRow[];
+  paid?: boolean;
+  /**
+   * paymentNotes differentiates from notes as it is displayed on the rendered PDF
+   */
+  paymentNotes?: string;
+}
+
+export interface TeacherPayment extends BTeacherPayment, AutoProps {}
+
+export interface TeacherPaymentResponse extends Omit<TeacherPayment, "teacher" | "editedBy"> {
+  teacher: { _id: string; name: string; rank?: string };
+  editedBy: { _id: string; name: string; rank?: string };
+}
 
 export const zTeacherPaymentRow = z.object({
   course: z.string().min(1, "select or enter a course"),
@@ -21,11 +45,14 @@ export const zBTeacherPayment = z.object({
 export const zTeacherPayment = addAutoProps(zBTeacherPayment);
 
 export const zTeacherPaymentResponse = zTeacherPayment.extend({
-  teacher: z.object({ _id: z.string(), name: z.string(), rank: z.string().optional() }),
-  editedBy: z.object({ _id: z.string(), name: z.string(), rank: z.string().optional() }),
+  teacher: z.object({
+    _id: z.string(),
+    name: z.string(),
+    rank: z.string().optional(),
+  }),
+  editedBy: z.object({
+    _id: z.string(),
+    name: z.string(),
+    rank: z.string().optional(),
+  }),
 });
-
-export type TeacherPaymentRow = z.infer<typeof zTeacherPaymentRow>;
-export type BTeacherPayment = z.infer<typeof zBTeacherPayment>;
-export type TeacherPayment = z.infer<typeof zTeacherPayment>;
-export type TeacherPaymentResponse = z.infer<typeof zTeacherPaymentResponse>;

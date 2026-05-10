@@ -1,5 +1,12 @@
 import { z } from "zod";
-import { zDayOfWeek } from "./dayOfWeek";
+import { zDayOfWeek, type DayOfWeek } from "./dayOfWeek";
+
+export interface ClassTimesInput {
+  startDate: Date;
+  freq: number;
+  daysOfWeek: DayOfWeek[];
+  numberOfClasses: number;
+}
 
 export const zClassTimesInput = z.object({
   startDate: z.date(),
@@ -7,5 +14,3 @@ export const zClassTimesInput = z.object({
   daysOfWeek: z.array(zDayOfWeek),
   numberOfClasses: z.coerce.number().int().min(1, "Must enroll in at least one class"),
 });
-
-export type ClassTimesInput = z.infer<typeof zClassTimesInput>;

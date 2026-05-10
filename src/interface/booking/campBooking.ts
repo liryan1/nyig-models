@@ -1,8 +1,18 @@
 import { z } from "zod";
 import { CampOption } from "../tracking";
-import { zBPaymentInfo } from "./bPaymentInfo";
-import { zBUserInfo } from "./bUserInfo";
-import { addAutoProps } from "../addAutoProps";
+import { addAutoProps, type AutoProps } from "../addAutoProps";
+import { type BPaymentInfo, zBPaymentInfo } from "./bPaymentInfo";
+import { type BUserInfo, zBUserInfo } from "./bUserInfo";
+
+export interface BCampBooking extends BUserInfo, BPaymentInfo {
+  ctId?: string;
+  isOnline: boolean;
+  classDates: string;
+  campOption: CampOption;
+  shipping?: boolean;
+}
+
+export interface CampBooking extends BCampBooking, AutoProps {}
 
 export const zBCampBooking = z
   .object({
@@ -16,6 +26,3 @@ export const zBCampBooking = z
   .merge(zBPaymentInfo);
 
 export const zCampBooking = addAutoProps(zBCampBooking);
-
-export type BCampBooking = z.infer<typeof zBCampBooking>;
-export type CampBooking = z.infer<typeof zCampBooking>;

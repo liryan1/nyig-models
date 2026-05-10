@@ -1,7 +1,27 @@
 import { z } from "zod";
-import { addAutoProps } from "../addAutoProps";
-import { zUserRoles } from "./roles";
-import { zUserProfile } from "./userProfile";
+import { addAutoProps, type AutoProps } from "../addAutoProps";
+import { zUserRoles, type UserRoles } from "./roles";
+import { zUserProfile, type UserProfile } from "./userProfile";
+
+export interface BUser {
+  name: string;
+  roles?: UserRoles;
+  email?: string | "";
+  address?: string | "";
+  country?: string | "";
+  phoneNumber?: string | "";
+  birthDate?: string | "";
+  /**
+   * For prompting the user to change their password on first login
+   */
+  shouldChangePassword?: boolean;
+  /**
+   * UserProfile Object storing user preferences
+   */
+  profiles?: UserProfile[];
+}
+
+export interface User extends BUser, AutoProps {}
 
 export const zBUser = z.object({
   name: z.string().min(2).max(100),
@@ -39,6 +59,3 @@ export const zBUser = z.object({
   profiles: z.array(zUserProfile).optional(),
 });
 export const zUser = addAutoProps(zBUser);
-
-export type BUser = z.infer<typeof zBUser>;
-export type User = z.infer<typeof zUser>;

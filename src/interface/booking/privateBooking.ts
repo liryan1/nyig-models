@@ -1,7 +1,15 @@
 import { z } from "zod";
-import { zBPaymentInfo } from "./bPaymentInfo";
-import { zBUserInfo } from "./bUserInfo";
-import { addAutoProps } from "../addAutoProps";
+import { addAutoProps, type AutoProps } from "../addAutoProps";
+import { type BPaymentInfo, zBPaymentInfo } from "./bPaymentInfo";
+import { type BUserInfo, zBUserInfo } from "./bUserInfo";
+
+export interface BPrivateBooking extends BUserInfo, BPaymentInfo {
+  courseId: string;
+  teacherId: string;
+  classDate?: string;
+}
+
+export interface PrivateBooking extends BPrivateBooking, AutoProps {}
 
 export const zBPrivateBooking = z
   .object({
@@ -13,6 +21,3 @@ export const zBPrivateBooking = z
   .merge(zBPaymentInfo);
 
 export const zPrivateBooking = addAutoProps(zBPrivateBooking);
-
-export type BPrivateBooking = z.infer<typeof zBPrivateBooking>;
-export type PrivateBooking = z.infer<typeof zPrivateBooking>;

@@ -1,7 +1,49 @@
 import { z } from "zod";
 import { PaymentMethod } from "./paymentMethod";
-import { addAutoProps } from "../addAutoProps";
-import { zStudent, zTeacher } from "../user";
+import { addAutoProps, type AutoProps } from "../addAutoProps";
+import { zStudent, zTeacher, type Student, type Teacher } from "../user";
+
+export interface Discount {
+  desc: string;
+  amount: number;
+}
+
+export interface InvoiceItem {
+  course: string;
+  price: number;
+  units: number;
+}
+
+export interface InvoicePackage {
+  student: string;
+  items: InvoiceItem[];
+}
+
+export interface InvoicePackageResponse extends Omit<InvoicePackage, "student"> {
+  student: Student;
+}
+
+export interface BInvoice {
+  billTo: string;
+  packages: InvoicePackage[];
+  discounts: Discount[];
+  textbook?: number;
+  shipping?: number;
+  paid?: PaymentMethod;
+  paidAt?: string;
+  showEin?: boolean;
+  notes?: string | "";
+  feeLabel?: string;
+  createdBy: string;
+}
+
+export interface Invoice extends BInvoice, AutoProps {}
+
+export interface InvoiceResponse extends Omit<Invoice, "packages" | "createdBy" | "editedBy"> {
+  createdBy: Teacher;
+  editedBy?: Teacher;
+  packages: InvoicePackageResponse[];
+}
 
 export const zDiscount = z.object({
   desc: z.string().min(1, "Discount description cannot be empty"),
@@ -38,16 +80,9 @@ export const zBInvoice = z.object({
 });
 
 export const zInvoice = addAutoProps(zBInvoice);
+
 export const zInvoiceResponse = zInvoice.extend({
   createdBy: zTeacher,
   editedBy: zTeacher.optional(),
   packages: z.array(zInvoicePackageResponse),
 });
-
-export type Discount = z.infer<typeof zDiscount>;
-export type InvoiceItem = z.infer<typeof zInvoiceItem>;
-export type InvoicePackage = z.infer<typeof zInvoicePackage>;
-export type InvoicePackageResponse = z.infer<typeof zInvoicePackageResponse>;
-export type BInvoice = z.infer<typeof zBInvoice>;
-export type Invoice = z.infer<typeof zInvoice>;
-export type InvoiceResponse = z.infer<typeof zInvoiceResponse>;

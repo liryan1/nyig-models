@@ -1,6 +1,28 @@
 import { z } from "zod";
 import { HearAboutUs } from "./hearAboutUs";
 
+export interface BUserInfo {
+  userId?: string;
+  firstName: string;
+  lastName: string;
+  rank: string;
+  email: string;
+  phone?: string;
+  address?: string;
+  notes?: string;
+  // Optional for backwards compatibility, required field on UI
+  hearAboutUs?: HearAboutUs;
+  // Additional info such as friend/family referer
+  hearAboutUsDetails?: string;
+  // show/hide on Aurora event page "who is coming" list
+  showOnWhoIsComing?: boolean;
+  participateAs?: "adult" | "youth";
+  // Required for youth tournaments
+  dateOfBirth?: string;
+  // Track the selected user profile
+  profileId?: string;
+}
+
 export const zBUserInfo = z.object({
   userId: z.string().optional(),
   firstName: z.string(),
@@ -22,5 +44,3 @@ export const zBUserInfo = z.object({
   // Track the selected user profile
   profileId: z.string().optional(),
 });
-
-export type BUserInfo = z.infer<typeof zBUserInfo>;

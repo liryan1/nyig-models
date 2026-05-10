@@ -1,6 +1,21 @@
 import { z } from "zod";
-import { addAutoProps } from "../addAutoProps";
+import { addAutoProps, type AutoProps } from "../addAutoProps";
 import { GoRank } from "./goRank";
+
+export interface BUserProfile {
+  firstName: string;
+  lastName: string;
+  rank?: GoRank;
+  agaId: string;
+  address?: string | "";
+  participateAs?: "adult" | "youth" | "";
+  showOnWhoIsComing?: boolean;
+  preferredEmail?: string | "";
+  phoneNumber?: string | "";
+  birthDate?: string | "";
+}
+
+export interface UserProfile extends BUserProfile, AutoProps {}
 
 export const zBUserProfile = z.object({
   firstName: z.string().min(2).max(50),
@@ -29,5 +44,3 @@ export const zBUserProfile = z.object({
     .optional(),
 });
 export const zUserProfile = addAutoProps(zBUserProfile);
-
-export type UserProfile = z.infer<typeof zUserProfile>;

@@ -1,7 +1,17 @@
 import { z } from "zod";
-import { zBPaymentInfo } from "./bPaymentInfo";
-import { zBUserInfo } from "./bUserInfo";
-import { addAutoProps } from "../addAutoProps";
+import { addAutoProps, type AutoProps } from "../addAutoProps";
+import { type BPaymentInfo, zBPaymentInfo } from "./bPaymentInfo";
+import { type BUserInfo, zBUserInfo } from "./bUserInfo";
+
+export interface BGroupBooking extends BUserInfo, BPaymentInfo {
+  gtId?: string;
+  isTrial?: boolean;
+  isOnline: boolean;
+  classDate?: string;
+  shipping?: boolean;
+}
+
+export interface GroupBooking extends BGroupBooking, AutoProps {}
 
 export const zBGroupBooking = z
   .object({
@@ -15,6 +25,3 @@ export const zBGroupBooking = z
   .merge(zBPaymentInfo);
 
 export const zGroupBooking = addAutoProps(zBGroupBooking);
-
-export type BGroupBooking = z.infer<typeof zBGroupBooking>;
-export type GroupBooking = z.infer<typeof zGroupBooking>;

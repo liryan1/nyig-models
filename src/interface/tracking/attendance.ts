@@ -1,9 +1,30 @@
 import { z } from "zod";
-import { zTuition } from "../payment/tuition";
+import { zTuition, type Tuition } from "../payment/tuition";
 import { AttendState } from "./attendState";
 import { CampOption } from "./campOption";
-import { addAutoProps } from "../addAutoProps";
-import { zStudent } from "../user";
+import { addAutoProps, type AutoProps } from "../addAutoProps";
+import { zStudent, type Student } from "../user";
+
+export interface BAttendance {
+  student: string;
+  states: AttendState[];
+  /**
+   * @deprecated This field is no longer used
+   */
+  tuition?: Tuition;
+  paid?: boolean;
+  campOption?: CampOption;
+}
+
+export interface Attendance extends BAttendance, AutoProps {}
+
+export interface AttendanceRequest extends Omit<Attendance, "_id"> {
+  _id?: string;
+}
+
+export interface AttendanceResponse extends Omit<Attendance, "student"> {
+  student: Student;
+}
 
 export const zBAttendance = z.object({
   student: z.string(),
@@ -17,14 +38,11 @@ export const zBAttendance = z.object({
 });
 
 export const zAttendance = addAutoProps(zBAttendance);
+
 export const zAttendanceRequest = zAttendance.extend({
   _id: z.string().optional(),
 });
+
 export const zAttendanceResponse = zAttendance.extend({
   student: zStudent,
 });
-
-export type BAttendance = z.infer<typeof zBAttendance>;
-export type Attendance = z.infer<typeof zAttendance>;
-export type AttendanceRequest = z.infer<typeof zAttendanceRequest>;
-export type AttendanceResponse = z.infer<typeof zAttendanceResponse>;

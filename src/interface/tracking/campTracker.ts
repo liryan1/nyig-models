@@ -1,11 +1,45 @@
 import { z } from "zod";
-import { addAutoProps } from "../addAutoProps";
-import { zCourse } from "../course";
-import { zSemester } from "../semester";
-import { zTeacher } from "../user";
-import { zAttendanceRequest, zAttendanceResponse } from "./attendance";
+import { addAutoProps, type AutoProps } from "../addAutoProps";
+import { zCourse, type Course } from "../course";
+import { zSemester, type Semester } from "../semester";
+import { zTeacher, type Teacher } from "../user";
+import {
+  zAttendanceRequest,
+  zAttendanceResponse,
+  type AttendanceRequest,
+  type AttendanceResponse,
+} from "./attendance";
 
 const MAX_TEACHERS = 10;
+
+export interface BCampTracker {
+  course: string;
+  teachers: string[];
+  semester: string;
+  /**
+   * occurrences are tracked by week for camps
+   */
+  occurrences: string[];
+  /**
+   * attendances are tracked by week for camps
+   */
+  attendances: AttendanceRequest[];
+  publicDescription?: string;
+  isNonPublic?: boolean;
+  notes?: string;
+}
+
+export interface CampTracker extends BCampTracker, AutoProps {}
+
+export interface CampTrackerResponse extends Omit<
+  CampTracker,
+  "course" | "teachers" | "semester" | "attendances"
+> {
+  course: Course;
+  teachers: Teacher[];
+  semester: Semester;
+  attendances: AttendanceResponse[];
+}
 
 export const zBCampTracker = z.object({
   course: z.string(),
@@ -28,6 +62,7 @@ export const zBCampTracker = z.object({
 });
 
 export const zCampTracker = addAutoProps(zBCampTracker);
+
 export const zCampTrackerResponse = zCampTracker.extend({
   course: zCourse,
   teachers: z
@@ -37,7 +72,3 @@ export const zCampTrackerResponse = zCampTracker.extend({
   semester: zSemester,
   attendances: z.array(zAttendanceResponse),
 });
-
-export type BCampTracker = z.infer<typeof zBCampTracker>;
-export type CampTracker = z.infer<typeof zCampTracker>;
-export type CampTrackerResponse = z.infer<typeof zCampTrackerResponse>;

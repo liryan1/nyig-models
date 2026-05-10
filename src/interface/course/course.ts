@@ -1,8 +1,45 @@
 import { z } from "zod";
 import { CourseCategory } from "./category";
 import { NYIGSchool } from "./school";
-import { addAutoProps } from "../addAutoProps";
-import { zBUser } from "../user";
+import { addAutoProps, type AutoProps } from "../addAutoProps";
+import { zBUser, type BUser } from "../user";
+
+export interface BCourse {
+  name: string;
+  category: CourseCategory;
+  /**
+   * @unit SECONDS - Duration of the course in seconds
+   */
+  duration: number;
+  /**
+   * @unit CENTS - Price of the course in cents
+   */
+  price: number;
+  description?: string | "";
+  /**
+   * NYIG School locations the course is offered at
+   */
+  schools?: NYIGSchool[];
+  /**
+   * Recommended level before taking this course
+   */
+  recLevel?: string | "";
+  /**
+   * Camp tuition for half-day option
+   */
+  halfCampTuition?: number;
+  /**
+   * Camp tuition for full-day option
+   */
+  fullCampTuition?: number;
+  superadminOnly?: boolean;
+}
+
+export interface Course extends BCourse, AutoProps {}
+
+export interface CourseResponse extends Omit<Course, "editedBy"> {
+  editedBy: BUser;
+}
 
 export const zBCourse = z.object({
   name: z.string(),
@@ -51,10 +88,7 @@ export const zBCourse = z.object({
 });
 
 export const zCourse = addAutoProps(zBCourse);
-const zCourseResponse = zCourse.extend({
+
+export const zCourseResponse = zCourse.extend({
   editedBy: zBUser,
 });
-
-export type BCourse = z.infer<typeof zBCourse>;
-export type Course = z.infer<typeof zCourse>;
-export type CourseResponse = z.infer<typeof zCourseResponse>;

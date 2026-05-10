@@ -1,6 +1,23 @@
 import { z } from "zod";
 import { Season } from "./season";
-import { addAutoProps } from "../addAutoProps";
+import { addAutoProps, type AutoProps } from "../addAutoProps";
+
+export interface BSemester {
+  season: Season;
+  year: number;
+  startDate: Date;
+  endDate: Date;
+  /**
+   * Format: start, end, start, end, ...
+   */
+  blackoutDates: Date[];
+  /**
+   * List of names of some break: date range
+   */
+  importantDates: string[];
+}
+
+export interface Semester extends BSemester, AutoProps {}
 
 export const zBSemester = z.object({
   season: z.nativeEnum(Season),
@@ -18,6 +35,3 @@ export const zBSemester = z.object({
 });
 
 export const zSemester = addAutoProps(zBSemester);
-
-export type BSemester = z.infer<typeof zBSemester>;
-export type Semester = z.infer<typeof zSemester>;

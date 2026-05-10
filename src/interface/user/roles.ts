@@ -6,9 +6,14 @@ export enum Role {
   USER = 2014,
 }
 
+export interface UserRoles {
+  user: number;
+  admin?: number;
+  superadmin?: number;
+}
+
 export const zUserRoles = z.object({
   user: z.number().int(),
   admin: z.number().int().optional(),
   superadmin: z.number().int().optional(),
 });
-export type UserRoles = z.infer<typeof zUserRoles>;

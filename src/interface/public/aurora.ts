@@ -2,6 +2,23 @@ import { z } from "zod";
 import { NYIGSchool } from "../course/school";
 import { AgeGroup } from "../course/ageGroup";
 
+export interface TeacherDisplay {
+  name: string;
+  email: string;
+  title: string;
+  imageUrl: string;
+  bio: string;
+}
+
+export interface CourseTable {
+  id: string;
+  name: string;
+  duration: number;
+  dateAndTime: string;
+  recommendedLevel: string;
+  tuition: string;
+}
+
 export const zTeacherDisplay = z.object({
   name: z.string(),
   email: z.string().email(),
@@ -18,10 +35,6 @@ export const zCourseTable = z.object({
   recommendedLevel: z.string(),
   tuition: z.string(),
 });
-
-export type CourseTable = z.infer<typeof zCourseTable>;
-
-export type TeacherDisplay = z.infer<typeof zTeacherDisplay>;
 
 export type AuroraCourses = {
   [school in NYIGSchool]: {
@@ -42,3 +55,11 @@ export interface NYIGMission {
   main2: string;
   mission: string;
 }
+
+export const zNYIGMission = z.object({
+  _id: z.string().optional(),
+  version: z.string(),
+  main1: z.string(),
+  main2: z.string(),
+  mission: z.string(),
+});

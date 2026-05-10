@@ -1,5 +1,31 @@
 import { z } from "zod";
-import { addAutoProps } from "../addAutoProps";
+import { addAutoProps, type AutoProps } from "../addAutoProps";
+
+export interface BEventTicket {
+  name: string;
+  /**
+   * Price in cents
+   */
+  price: number;
+  /**
+   * @optional description of the ticket
+   */
+  description?: string;
+  /**
+   *  @optional The ticket cannot be purchased if true
+   */
+  isNotBuyable?: boolean;
+  /**
+   *  @optional If date is provided and in the past, ticket cannot be purchased
+   */
+  lastBuyableDate?: Date;
+  /**
+   *  @optional max limit is 1 unless maxPerOrder is specified
+   */
+  maxPerOrder?: number;
+}
+
+export interface EventTicket extends BEventTicket, AutoProps {}
 
 export const zBEventTicket = z.object({
   name: z.string().min(4, "Name must be at least 4 characters"),
@@ -25,6 +51,3 @@ export const zBEventTicket = z.object({
   maxPerOrder: z.coerce.number().int().optional(),
 });
 export const zEventTicket = addAutoProps(zBEventTicket);
-
-export type BEventTicket = z.infer<typeof zBEventTicket>;
-export type EventTicket = z.infer<typeof zEventTicket>;

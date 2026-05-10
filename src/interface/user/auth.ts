@@ -1,5 +1,26 @@
 import { z } from "zod";
 
+export interface CreateAdminAccountRequest {
+  _id: string;
+  user: string;
+  pwd: string;
+}
+
+export interface ChangePasswordRequest {
+  prev: string;
+  next: string;
+}
+
+export interface LoginRequest {
+  user: string;
+  pwd: string;
+}
+
+export interface LoginResponse {
+  user: string;
+  token: string;
+}
+
 export const zCreateAdminAccountRequest = z.object({
   _id: z.string(),
   user: z.string().min(3, "Username must be at least 3 characters"),
@@ -20,8 +41,3 @@ export const zLoginResponse = z.object({
   user: z.string(),
   token: z.string(),
 });
-
-export type CreateAdminAccountRequest = z.infer<typeof zCreateAdminAccountRequest>;
-export type ChangePasswordRequest = z.infer<typeof zChangePasswordRequest>;
-export type LoginRequest = z.infer<typeof zLoginRequest>;
-export type LoginResponse = z.infer<typeof zLoginResponse>;

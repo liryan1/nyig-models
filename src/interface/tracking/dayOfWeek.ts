@@ -10,4 +10,4 @@ export enum DayOfWeek {
   SATURDAY = 6,
 }
 
-export const zDayOfWeek = z.nativeEnum(DayOfWeek);
+export const zDayOfWeek: z.ZodType<DayOfWeek> = z.nativeEnum(DayOfWeek);

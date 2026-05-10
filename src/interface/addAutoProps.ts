@@ -1,5 +1,13 @@
 import { z } from "zod";
 
+export interface AutoProps {
+  _id: string;
+  editedBy?: string;
+  createdAt?: string;
+  updatedAt?: string;
+  isDeleted?: string;
+}
+
 /**
  * Appends auto-populated props for general use-case
  * _id is the MongoDB primary key

@@ -1,10 +1,22 @@
 {
   "name": "@nyig/models",
-  "version": "0.6.16",
+  "version": "0.7.0",
   "license": "MIT",
   "main": "index.js",
   "module": "index.mjs",
   "types": "index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./index.d.ts",
+      "import": "./index.mjs",
+      "require": "./index.js"
+    },
+    "./*": {
+      "types": "./*.d.ts",
+      "import": "./*.mjs",
+      "require": "./*.js"
+    }
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/liryan1/nyig-models.git"
@@ -15,7 +27,7 @@
     "provenance": true
   },
   "scripts": {
-    "build": "tsup src/index.ts --format cjs,esm --dts",
+    "build": "tsup",
     "clean": "rm -rf dist node_modules",
     "format": "prettier --write src",
     "lint": "pnpm run format && tsc",
@@ -32,7 +44,8 @@
     "lint-staged": "^16.2.7",
     "prettier": "^3.8.1",
     "tsup": "^8.5.1",
-    "typescript": "^5.9.3"
+    "typescript": "^5.9.3",
+    "zod-to-ts": "^2.0.0"
   },
   "lint-staged": {
     "*.{js,ts,md}": "prettier --write"

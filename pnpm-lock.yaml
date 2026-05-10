@@ -30,6 +30,9 @@ importers:
       typescript:
         specifier: ^5.9.3
         version: 5.9.3
+      zod-to-ts:
+        specifier: ^2.0.0
+        version: 2.0.0(typescript@5.9.3)(zod@3.25.76)
     publishDirectory: dist
 
 packages:
@@ -1096,6 +1099,12 @@ packages:
     engines: {node: '>= 14.6'}
     hasBin: true
 
+  zod-to-ts@2.0.0:
+    resolution: {integrity: sha512-aHsUgIl+CQutKAxtRNeZslLCLXoeuSq+j5HU7q3kvi/c2KIAo6q4YjT7/lwFfACxLB923ELHYMkHmlxiqFy4lw==}
+    peerDependencies:
+      typescript: ^5.0.0
+      zod: ^3.25.0 || ^4.0.0
+
   zod@3.25.76:
     resolution: {integrity: sha512-gzUt/qt81nXsFGKIFcC3YnfEAx5NkunCfnDlvuBSSFS02bcXu4Lmea0AFIUwbLWxWPx3d9p8S5QoaujKcNQxcQ==}
 
@@ -2093,5 +2102,10 @@ snapshots:
       strip-ansi: 7.1.0
 
   yaml@2.8.1: {}
+
+  zod-to-ts@2.0.0(typescript@5.9.3)(zod@3.25.76):
+    dependencies:
+      typescript: 5.9.3
+      zod: 3.25.76
 
   zod@3.25.76: {}

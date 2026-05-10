@@ -1,8 +1,85 @@
 import { z } from "zod";
-import { zImageDef } from "../public";
-import { zEventTicket } from "./eTicket";
-import { addAutoProps } from "../addAutoProps";
+import { zImageDef, type ImageDef } from "../public";
+import { zEventTicket, type EventTicket } from "./eTicket";
+import { addAutoProps, type AutoProps } from "../addAutoProps";
 import { YouthOrAdult } from "./youthOrAdult";
+
+export interface BEventConfig {
+  /**
+   * Location of the event
+   */
+  location?: string;
+  /**
+   * URL of the tournament on the official website
+   * Must be a valid URL link
+   */
+  url: string;
+  /**
+   * Full name of the tournament
+   */
+  title: string;
+  /**
+   * Abbreviated title of the tournament
+   */
+  shortTitle: string;
+  /**
+   * Tournament start date and time
+   */
+  tStart: Date;
+  /**
+   * Tournament end date and time
+   */
+  tEnd: Date;
+  /**
+   * Short description for tournament card
+   */
+  shortDescription: string;
+  /**
+   * Full description
+   */
+  description: string;
+  /**
+   * @optional description of the tickets step, shown in service
+   * when the customer is on step 1 of the booking page
+   */
+  ticketsStepDescription?: string;
+  /**
+   * @optional description of the participant step, shown in service
+   * when the customer is on step 2 of the booking page
+   */
+  participantStepDescription?: string;
+  /**
+   * List of ticket object IDs for this tournament
+   */
+  tickets: string[];
+  /**
+   * If false, the tournament registration is closed
+   */
+  canRegister: boolean;
+  /**
+   * If false, the tournament is not viewable in public APIs
+   * admin console can still see it
+   */
+  isHidden?: boolean;
+  /**
+   * Defines the registration of youth and adults in the event
+   */
+  youthOrAdult?: YouthOrAdult;
+  /**
+   * If true, free form donation amounts are disabled.
+   */
+  donationsDisabled?: boolean;
+  /**
+   * Defines URL, height, width of the image
+   */
+  image?: ImageDef;
+}
+
+export interface EventConfig extends BEventConfig, AutoProps {}
+
+export interface EventConfigResponse extends Omit<EventConfig, "tickets"> {
+  tickets: EventTicket[];
+}
 
 export const zBEventConfig = z.object({
   /**
@@ -80,10 +157,6 @@ export const zEventConfig = addAutoProps(zBEventConfig);
 export const zEventConfigResponse = zEventConfig.extend({
   tickets: z.array(zEventTicket),
 });
-
-export type BEventConfig = z.infer<typeof zBEventConfig>;
-export type EventConfig = z.infer<typeof zEventConfig>;
-export type EventConfigResponse = z.infer<typeof zEventConfigResponse>;
 
 /**
  * For public endpoints

@@ -1,5 +1,17 @@
 import { z } from "zod";
-import { zEventTicket } from "./eTicket";
+import { zEventTicket, type EventTicket } from "./eTicket";
+
+export interface EventTicketReg {
+  ticket: string;
+  /**
+   * integer minimum 1, otherwise no ticket is being bought
+   */
+  amount: number;
+}
+
+export interface EventTicketRegResponse extends Omit<EventTicketReg, "ticket"> {
+  ticket: EventTicket;
+}
 
 export const zEventTicketReg = z.object({
   ticket: z.string(),
@@ -12,6 +24,3 @@ export const zEventTicketReg = z.object({
 export const zEventTicketRegResponse = zEventTicketReg.extend({
   ticket: zEventTicket,
 });
-
-export type EventTicketRegResponse = z.infer<typeof zEventTicketRegResponse>;
-export type EventTicketReg = z.infer<typeof zEventTicketReg>;
