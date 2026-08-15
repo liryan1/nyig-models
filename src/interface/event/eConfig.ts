@@ -164,6 +164,7 @@ export const zEventConfigResponse = zEventConfig.extend({
 export interface PublicEventConfigResponse extends EventConfigResponse {
   registrationStats: {
     totalConfirmed: number;
-    whoIsComing: { name: string; rank: string }[];
+    totalTickets?: number;
+    whoIsComing: { name: string; rank: string; ticketCount?: number }[];
   };
 }
