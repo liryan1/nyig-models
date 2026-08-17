@@ -1,6 +1,6 @@
 {
   "name": "@nyig/models",
-  "version": "0.7.2",
+  "version": "0.7.3",
   "license": "MIT",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
@@ -21,9 +21,11 @@
     "type": "git",
     "url": "https://github.com/liryan1/nyig-models.git"
   },
+  "files": [
+    "dist"
+  ],
   "publishConfig": {
     "access": "public",
-    "directory": "dist",
     "provenance": true
   },
   "scripts": {
@@ -32,7 +34,6 @@
     "format": "prettier --write src",
     "lint": "pnpm run format && tsc",
     "prepare": "husky",
-    "prepublishOnly": "jq '.main = \\\"index.js\\\" | .module = \\\"index.mjs\\\" | .types = \\\"index.d.ts\\\" | .exports.\\\".\\\" = {types: \\\"./index.d.ts\\\", import: \\\"./index.mjs\\\", require: \\\"./index.js\\\"} | .exports.\\\"./*\\\" = {types: \\\"./*.d.ts\\\", import: \\\"./*.mjs\\\", require: \\\"./*.js\\\"}' package.json > dist/package.json && cp README.md dist",
     "release": "pnpm run build && changeset publish"
   },
   "peerDependencies": {
