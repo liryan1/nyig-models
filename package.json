@@ -2,19 +2,19 @@
   "name": "@nyig/models",
   "version": "0.7.2",
   "license": "MIT",
-  "main": "index.js",
-  "module": "index.mjs",
-  "types": "index.d.ts",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
   "exports": {
     ".": {
-      "types": "./index.d.ts",
-      "import": "./index.mjs",
-      "require": "./index.js"
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
     },
     "./*": {
-      "types": "./*.d.ts",
-      "import": "./*.mjs",
-      "require": "./*.js"
+      "types": "./dist/*.d.ts",
+      "import": "./dist/*.mjs",
+      "require": "./dist/*.js"
     }
   },
   "repository": {
@@ -32,7 +32,7 @@
     "format": "prettier --write src",
     "lint": "pnpm run format && tsc",
     "prepare": "husky",
-    "prepublishOnly": "cp package.json README.md dist",
+    "prepublishOnly": "jq '.main = \\\"index.js\\\" | .module = \\\"index.mjs\\\" | .types = \\\"index.d.ts\\\" | .exports.\\\".\\\" = {types: \\\"./index.d.ts\\\", import: \\\"./index.mjs\\\", require: \\\"./index.js\\\"} | .exports.\\\"./*\\\" = {types: \\\"./*.d.ts\\\", import: \\\"./*.mjs\\\", require: \\\"./*.js\\\"}' package.json > dist/package.json && cp README.md dist",
     "release": "pnpm run build && changeset publish"
   },
   "peerDependencies": {
