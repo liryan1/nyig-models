@@ -7,11 +7,11 @@
     "strict": true,
     "skipLibCheck": true,
     "noUncheckedIndexedAccess": true,
-    /* If NOT transpiling with TypeScript: */
-    "moduleResolution": "Bundler",
-    "module": "ESNext",
-    "noEmit": true,
-    /* If your code runs in the DOM: */
+    "moduleResolution": "NodeNext",
+    "module": "NodeNext",
+    "rootDir": "src",
+    "outDir": "dist",
+    "declaration": true,
     "lib": ["es2022", "dom", "dom.iterable"]
   },
   "include": ["src"],

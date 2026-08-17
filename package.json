@@ -1,21 +1,12 @@
 {
   "name": "@nyig/models",
-  "version": "0.7.3",
+  "version": "0.7.4",
   "license": "MIT",
   "main": "./dist/index.js",
-  "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
   "exports": {
-    ".": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/index.mjs",
-      "require": "./dist/index.js"
-    },
-    "./*": {
-      "types": "./dist/*.d.ts",
-      "import": "./dist/*.mjs",
-      "require": "./dist/*.js"
-    }
+    ".": "./dist/index.js",
+    "./*": "./dist/*.js"
   },
   "repository": {
     "type": "git",
@@ -29,7 +20,7 @@
     "provenance": true
   },
   "scripts": {
-    "build": "tsup",
+    "build": "tsc && cp README.md dist/",
     "clean": "rm -rf dist node_modules",
     "format": "prettier --write src",
     "lint": "pnpm run format && tsc",
@@ -44,7 +35,6 @@
     "husky": "^9.1.7",
     "lint-staged": "^17.3.0",
     "prettier": "^3.9.6",
-    "tsup": "^8.5.1",
     "typescript": "^5.9.3",
     "zod-to-ts": "^2.1.0"
   },
