@@ -5,3 +5,4 @@ export * from "./campBooking";
 export * from "./groupBooking";
 export * from "./privateBooking";
 export * from "./hearAboutUs";
+export * from "./classRegistration";
