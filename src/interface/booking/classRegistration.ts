@@ -15,6 +15,15 @@ export const zClassRegistrationResponse = z.object({
   expireAt: z.string().optional(),
   createdAt: z.string().optional(),
   isTrial: z.boolean().optional(),
+  address: z.string().optional(),
+  notes: z.string().optional(),
+  dateOfBirth: z.string().optional(),
+  hearAboutUs: z.string().optional(),
+  isOnline: z.boolean().optional(),
+  classDate: z.string().optional(),
+  classDates: z.string().optional(),
+  campOption: z.string().optional(),
+  shipping: z.boolean().optional(),
 });
 
 export type ClassRegistrationResponse = z.infer<typeof zClassRegistrationResponse>;
